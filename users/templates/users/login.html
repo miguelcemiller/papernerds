@@ -4,16 +4,21 @@
 {% block content %}
 
 <div class="login_container">
-    <span>Welcome back</span>
-    <span>We're happy to see you again!</span>
-    <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        <input type="email" name="email" placeholder="Email"><br>
-        <input type="password" name="password" placeholder="Password"><br>
-        <input type="submit" value="Log In">
-    </form>
-    <span>Forgot your password?</span>
-    <span>Don't have an account? Sign Up</span>
+    <div class="flex_container">
+        <span class="login_title">Welcome back</span>
+        <span class="login_sub_title">We're happy to see you again!</span>
+        <form class="login_form" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input class="form_text" type="" name="username" placeholder="Username">
+            <input class="form_text" type="password" name="password" placeholder="Password">
+            <input class="form_btn" type="submit" value="Log In">
+        </form>
+        <span class="login_forgot">Forgot your password?</span>
+        <span class="login_dont">Don't have an account? 
+            <span>Sign Up</span> 
+        </span>
+    </div>
+
 </div>
 
 {% endblock content %}

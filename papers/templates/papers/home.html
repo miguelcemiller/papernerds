@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+<section class="cards">
+   
+    {% for paper in papers %}
+    <div class="paper_card">
+        <div class="paper_details">
+            <div class="paper_title">{{ paper.title }}</div>
+            <div class="subtitle_container">
+                <div class="paper_views">{{ paper.downloads }} views</div>
+                <div class="paper_author">Author1 et al., {{ paper.year }}</div>
+            </div>
+            <div class="paper_abstract">{{ paper.abstract|slice:":240"}}...</div>
+        </div>
+    </div>
+    {% endfor %}
+ 
+</section>
+
+{% endblock content %}

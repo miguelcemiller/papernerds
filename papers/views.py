@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from . models import Paper
 
-# Create your views here.
+def homeView(request):
+    papers = Paper.objects.all()
+    context = {'papers': papers}
+
+    return render(request, 'papers/home.html', context)

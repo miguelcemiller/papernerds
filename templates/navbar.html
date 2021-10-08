@@ -10,13 +10,20 @@
                 <img src="{% static 'images/search.svg'%}" >
             </button>
         </div>
+        
+        {% if request.user.is_authenticated %}
+        <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
+        <div class="profile_name">{{ request.user.first_name }}</div>
+        {% else %}
         <div class="cta_container">
-            <button class="btn btn_secondary">Sign Up</button>
+            <a href="{% url 'login' %}"><button class="btn btn_secondary">Sign In</button></a>
             <div class="hamburger">
                 <div class="bar"></div>
                 <div class="bar"></div>
                 <div class="bar"></div>
             </div>
         </div>
+        {% endif %}
+
     </div>  
 </header>
