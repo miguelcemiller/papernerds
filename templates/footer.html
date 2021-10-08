@@ -3,16 +3,17 @@
 
 <footer>
     <div class="footer">
-        <img class="logo" src="images/logo.svg" alt="Paperx" title="Paperx">
+        <img class="logo" src="{% static 'images/papernerds.svg'%}" alt="Papernerds" title="Papernerds">
         <nav class="nav">
             <div class="nav_social">
-                <a href=""><img src="images/twitter.svg" title="Paperx on Twitter"></a>
-                <a href=""><img src="images/instagram.svg" title="Paperx on Instagram"></a>
-                <a href=""><img src="images/facebook.svg" title="Paperx on Facebook"></a>
+                <a href="#"><img src="{% static 'images/twitter.svg'%}" title="Papernerds on Twitter"></a>
+                <a href="#"><img src="{% static 'images/instagram.svg'%}" title="Papernerds on Instagram"></a>
+                <a href="#"><img src="{% static 'images/facebook.svg'%}" title="Papernerds on Facebook"></a>
             </div>
         </nav>   
-        <div class="cta_container">
-            <button class="btn login">Sign up</button>
+        <div class="mode_toggle">
+            <div class="toggle_circle"></div>
+            <div class="mode_text">Dark</div>
         </div>
     </div>  
 </footer>
