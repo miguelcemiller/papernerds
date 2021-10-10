@@ -4,13 +4,13 @@
 <header>
     <div class="navbar">
         <img class="logo" src="{% static 'images/papernerds.svg'%}" alt="Papernerds" title="Papernerds">
-        <div class="search_container">
-            <input class="search_text" type="text" id="input" placeholder="Search...">
+        <form class="search_container" action="" method="GET">
+            <input name="search" class="search_text" type="text" id="input" placeholder="Search...">
             <button class="search_btn">
                 <img src="{% static 'images/search.svg'%}" >
             </button>
-        </div>
-        
+        </form>
+    
         {% if request.user.is_authenticated %}
         <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
         <div class="profile_name">{{ request.user.first_name }}</div>
