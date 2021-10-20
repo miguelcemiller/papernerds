@@ -4,16 +4,26 @@
 <header>
     <div class="navbar">
         <img class="logo" src="{% static 'images/papernerds.svg'%}" alt="Papernerds" title="Papernerds">
+
+        {% if request.get_full_path == '/' %}
+        
+        <!-- nothing -->
+        
+        {% else %}
         <form class="search_container" action="" method="GET">
             <input name="search" class="search_text" type="text" id="input" placeholder="Search...">
             <button class="search_btn">
                 <img src="{% static 'images/search.svg'%}" >
             </button>
         </form>
+        {% endif %}
+
     
         {% if request.user.is_authenticated %}
-        <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
-        <div class="profile_name">{{ request.user.first_name }}</div>
+        <div class="profile_container">
+            <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
+            <div class="profile_name">{{ request.user.first_name }}</div>
+        </div>
         {% else %}
         <div class="cta_container">
             <a href="{% url 'login' %}"><button class="btn btn_secondary">Sign In</button></a>
@@ -24,6 +34,6 @@
             </div>
         </div>
         {% endif %}
-
     </div>  
+
 </header>

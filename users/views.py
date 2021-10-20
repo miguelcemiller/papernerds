@@ -5,6 +5,10 @@ from . forms import LoginForm
 from django.contrib.auth.models import User
 
 
+def landingView(request):
+    return render(request, 'users/landing.html')
+
+
 def loginView(request):
     if request.method == 'POST':
         username= request.POST['username']
