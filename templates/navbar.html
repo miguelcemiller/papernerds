@@ -23,10 +23,17 @@
 
     
         {% if request.user.is_authenticated %}
-        <div class="profile_container">
-            <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
-            <div class="profile_name">{{ request.user.first_name }}</div>
+        <div class="profile_nav">
+            <div class="profile_container">
+                <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
+                <div class="profile_name">{{ request.user.first_name }}</div>
+            </div>
+            <ul class="hide">
+                <li><a href="#">Profile</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
         </div>
+        
         {% else %}
         <div class="cta_container">
             <a href="{% url 'login' %}"><button class="btn btn_secondary">Sign In</button></a>
@@ -40,3 +47,18 @@
     </div>  
 
 </header>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    $('.profile_container').click(function(e) {
+        e.stopPropagation();
+       $('.profile_nav > ul').toggleClass('hide');
+    });
+
+    $('body').on('click', function() { 
+        $('.profile_nav > ul').addClass('hide');
+    });
+
+</script>

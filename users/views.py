@@ -19,6 +19,8 @@ def loginView(request):
         if user is not None:
             login(request, user)
             print("logged in")
+
+            return redirect('home')
         else:
             print('Username or password is incorrect')
 
@@ -26,7 +28,7 @@ def loginView(request):
 
 def logoutView(request):
     logout(request)
-    return redirect('login')
+    return redirect('landing')
 
 
 # def homeView(request):

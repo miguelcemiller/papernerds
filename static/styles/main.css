@@ -248,9 +248,70 @@ header {
     box-shadow: none;
 }
 
+
+.profile_nav {
+    position: relative;
+}
+
+.profile_nav ul {
+    margin-top: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    width: 150px;
+    height: 80px;
+    background-color: var(--background);
+    left: -10px;
+    list-style: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    transition: opacity 0.4s ease;
+
+    z-index: 100;
+}
+
+.profile_nav li {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.profile_nav li:hover {
+    background-color: #F8F8F9;
+}
+
+.profile_nav a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+
+.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
 .profile_container {
     display: flex;
     align-items: center;
+    padding: 5px 12px 5px 5px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.profile_container:hover {
+    background-color: #F8F8F9;
 }
 
 .profile_image {
