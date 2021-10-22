@@ -96,8 +96,10 @@ body {
     flex-direction: column;
 }
 
+
 .wrapper {
     min-height: calc(100% + 60px);
+    margin-bottom: -60px;
 }
 
 /* Navigation Bar */
@@ -770,20 +772,20 @@ header {
 
 /* Home */
 
-section {
-    margin-bottom: 30px;
-}
+
+/* Paper Card */
 
 .cards {
     display: flex;
     flex-direction: column;
     gap: 15px;
 
+    height: 697px;
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 
-/* Paper Card */
 
 .paper_card {
     width: 694px;
@@ -834,10 +836,10 @@ section {
 
 /* Pagination */
 
-
-
 .pagination_nav {
     text-align: center;
+
+    font-weight: 600;
 }
 
 .pagination_nav li {
@@ -847,24 +849,28 @@ section {
 .pagination_nav li a {
     display: inline-block;
     text-decoration: none;
-    padding: 4px 11px;
-    color: #000
+    padding: 2px 11px;
+    color: var(--text-primary);
 }
 
 .pagination_nav li a {
-border-radius: 5px;
+border-radius: 7px;
 -webkit-transition: background-color 0.3s;
 transition: background-color 0.3s
     
 }
 .pagination_nav li a.active {
-background-color: #4caf50;
-color: #fff
+background-color: var(--text-primary);
+color: var(--background);
 }
 
 .pagination_nav li a:hover:not(.active) {
-background-color: #ddd;
+background-color: var(--card-hover);
 } 
+
+/* End Pagination */
+
+
 
 /* End Home */
 

@@ -22,13 +22,30 @@
     {% endfor %}
 </section>
 
+
+{% if papers.has_other_pages %}
 <div class="pagination">
     <ul class="pagination_nav">
-        <li><a href="#" class="active">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
+
+        {% if papers.has_previous %}
+        <li><a href="?page={{papers.previous_page_number}}">&#10094; Prev</a></li>
+        {% endif %}
+
+        {% for page in custom_range %}
+        {% if page == papers.number %}
+        <li><a href="?page={{page}}" class="active">{{page}}</a></li>
+        {% else %}
+        <li><a href="?page={{page}}">{{page}}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if papers.has_next %}
+        <li><a href="?page={{papers.next_page_number}}">Next &#10095;</a></li>
+        {% endif %}
+    
     </ul>
 </div>
+{% endif %}
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

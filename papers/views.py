@@ -59,7 +59,7 @@ def homeView(request):
 
             abstract_list = []
 
-            if search_num is not 0:
+            if search_num != 0:
                 for i in cosine_similarities.argsort()[-search_num:][::-1]:
                     #print(df.iloc[i, 0])
                     abstract_list.append(df.iloc[i, 0])
@@ -67,7 +67,29 @@ def homeView(request):
             #papers = Paper.objects.filter(abstract__in=abstract_list)
             papers = filter__in_preserve(Paper.objects, 'abstract', abstract_list).all()
 
-            #p = Paginator(papers, 4)
+            page = request.GET.get('page')
+            paginator = Paginator(papers, 4)
+
+            try:
+                papers = paginator.page(page)
+            except PageNotAnInteger:
+                page = 1
+                papers = paginator.page(page)
+            except EmptyPage:
+                page = paginator.num_pages
+                papers = paginator.page(page)
+
+            left_index = (int(page) - 4)
+            
+            if left_index < 1:
+                left_index = 1
+        
+            right_index = (int(page) + 5)
+
+            if right_index > paginator.num_pages:
+                right_index = paginator.num_pages + 1
+
+            custom_range = range(left_index, right_index)
 
         else:
             # empty search
@@ -91,7 +113,19 @@ def homeView(request):
             page = paginator.num_pages
             papers = paginator.page(page)
 
-    context = {'papers': papers, 'search': search }
+        left_index = (int(page) - 4)
+        
+        if left_index < 1:
+            left_index = 1
+    
+        right_index = (int(page) + 5)
+
+        if right_index > paginator.num_pages:
+            right_index = paginator.num_pages + 1
+
+        custom_range = range(left_index, right_index)
+
+    context = {'papers': papers, 'search': search, 'custom_range': custom_range}
     return render(request, 'papers/home.html', context)
 
 
