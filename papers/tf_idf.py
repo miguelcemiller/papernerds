@@ -9,10 +9,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 # Define the Functions
 
-def preprocess(body):
+def preprocess(title, body):
     """ Preprocess the input, i.e. lowercase, remove html tags, special character and digits."""
     
-    text = body
+    text = title + body
     
     # to lower case
     text = text.lower()

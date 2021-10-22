@@ -24,12 +24,19 @@ def homeView(request):
         
         if search:
             #get the corpus
-            corpus_abstracts = Paper.objects.values_list('abstract', flat=True)
+            #corpus_abstracts = Paper.objects.values_list('title', 'abstract', flat=True)
+            
+            corpus_abstracts = Paper.objects.values('title', 'abstract')
 
-            df = pd.DataFrame(corpus_abstracts, columns=["abstract"])
+            list_result = [entry for entry in corpus_abstracts] 
+            #print(list_result)
+
+            df = pd.DataFrame(list_result, columns=["title", "abstract"])
+            print(df)
+            
 
             #preprocess the corpus
-            data = [preprocess(abstract) for abstract in df['abstract']]
+            data = [preprocess(title, abstract) for title, abstract in zip(df['title'], df['abstract'])]
 
             # Learn vocabulary and idf, return term-document matrix
             X,v = create_tfidf_features(data)
@@ -62,7 +69,7 @@ def homeView(request):
             if search_num != 0:
                 for i in cosine_similarities.argsort()[-search_num:][::-1]:
                     #print(df.iloc[i, 0])
-                    abstract_list.append(df.iloc[i, 0])
+                    abstract_list.append(df.iloc[i, 1])
             
             #papers = Paper.objects.filter(abstract__in=abstract_list)
             papers = filter__in_preserve(Paper.objects, 'abstract', abstract_list).all()
