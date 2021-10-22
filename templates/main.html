@@ -10,15 +10,21 @@
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
 </head>
 <body>
-    {% include 'navbar.html' %}
 
-    {% block content %}
+    {% if request.get_full_path == '/' %}
+    <div>
+    {% else %}
+    <div class="wrapper">
+    {% endif %}
 
+        {% include 'navbar.html' %}
+
+        {% block content %}
     
-
-    {% endblock content %}
-
-
+        {% endblock content %}
+    </div>
+    
+    
     {% include 'footer.html' %}
 
     

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from . models import Paper
 from django.db.models import Q
 from django.db.models import F
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from collections import OrderedDict
 
@@ -11,7 +12,6 @@ from . boyermoore import boyer_moore_horspool
 from . tf_idf import preprocess, create_tfidf_features, calculate_similarity, show_similar_documents
 
 import time
-
 import pandas as pd
 
 
@@ -67,14 +67,29 @@ def homeView(request):
             #papers = Paper.objects.filter(abstract__in=abstract_list)
             papers = filter__in_preserve(Paper.objects, 'abstract', abstract_list).all()
 
+            #p = Paginator(papers, 4)
+
         else:
             # empty search
             papers = Paper.objects.all()
+
+            #p = Paginator(papers, 4)
   
     else:
         # no search
         papers = Paper.objects.all()
 
+        page = request.GET.get('page')
+        paginator = Paginator(papers, 4)
+
+        try:
+            papers = paginator.page(page)
+        except PageNotAnInteger:
+            page = 1
+            papers = paginator.page(page)
+        except EmptyPage:
+            page = paginator.num_pages
+            papers = paginator.page(page)
 
     context = {'papers': papers, 'search': search }
     return render(request, 'papers/home.html', context)

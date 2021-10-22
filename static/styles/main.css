@@ -11,6 +11,7 @@
     --line: rgb(232, 232, 232);
 
     --btn-hover: rgb(155, 103, 238);
+    --card-hover: #F8F8F9;
 
     --nav-gap: 38px;
     --page-gutter: 40px;
@@ -90,12 +91,14 @@ body {
 
     min-width: 500px;
 
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-
+.wrapper {
+    min-height: calc(100% + 60px);
+}
 
 /* Navigation Bar */
 
@@ -125,6 +128,11 @@ header {
     height: 23px;
 
     margin-right: var(--nav-gap);
+}
+
+.footer_logo {
+    cursor: pointer;
+    height: 23px;
 }
 
 .search_container {
@@ -285,7 +293,7 @@ header {
 }
 
 .profile_nav li:hover {
-    background-color: #F8F8F9;
+    background-color: var(--card-hover);
 }
 
 .profile_nav a {
@@ -311,7 +319,7 @@ header {
 }
 
 .profile_container:hover {
-    background-color: #F8F8F9;
+    background-color: var(--card-hover);
 }
 
 .profile_image {
@@ -781,11 +789,19 @@ section {
     width: 694px;
     height: 163px;
 
+    background: var(--background);
+
     border: 1px solid var(--line);
     border-radius: 18px;
 
     padding: 20px 45px 15px 25px;
     margin: 0 auto;
+
+    cursor: pointer;
+}
+
+.paper_card:hover {
+    background-color: var(--card-hover);
 }
 
 .paper_details {
@@ -815,6 +831,40 @@ section {
 }
 
 /* End Paper Card */
+
+/* Pagination */
+
+
+
+.pagination_nav {
+    text-align: center;
+}
+
+.pagination_nav li {
+    display: inline;
+}
+
+.pagination_nav li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 4px 11px;
+    color: #000
+}
+
+.pagination_nav li a {
+border-radius: 5px;
+-webkit-transition: background-color 0.3s;
+transition: background-color 0.3s
+    
+}
+.pagination_nav li a.active {
+background-color: #4caf50;
+color: #fff
+}
+
+.pagination_nav li a:hover:not(.active) {
+background-color: #ddd;
+} 
 
 /* End Home */
 
