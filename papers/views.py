@@ -102,7 +102,29 @@ def homeView(request):
             # empty search
             papers = Paper.objects.all()
 
-            #p = Paginator(papers, 4)
+            page = request.GET.get('page')
+            paginator = Paginator(papers, 4)
+
+            try:
+                papers = paginator.page(page)
+            except PageNotAnInteger:
+                page = 1
+                papers = paginator.page(page)
+            except EmptyPage:
+                page = paginator.num_pages
+                papers = paginator.page(page)
+
+            left_index = (int(page) - 4)
+            
+            if left_index < 1:
+                left_index = 1
+        
+            right_index = (int(page) + 5)
+
+            if right_index > paginator.num_pages:
+                right_index = paginator.num_pages + 1
+
+            custom_range = range(left_index, right_index)
   
     else:
         # no search
@@ -137,8 +159,11 @@ def homeView(request):
 
 
 
+def paperView(request, pk):
+    paper = Paper.objects.get(id=pk)
 
-
+    context = {'paper': paper}
+    return render(request, context)
 
 
 

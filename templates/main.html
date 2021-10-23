@@ -11,18 +11,13 @@
 </head>
 <body>
 
-    {% if request.get_full_path == '/' %}
-    <div>
-    {% else %}
-    <div class="wrapper">
-    {% endif %}
-        {% include 'navbar.html' %}
+  
+    {% include 'navbar.html' %}
 
-        {% block content %}
-    
-        {% endblock content %}
-    </div>
-    
+    {% block content %}
+
+    {% endblock content %}
+
     {% include 'footer.html' %}
 
     

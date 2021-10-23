@@ -11,7 +11,6 @@
             <div class="sub_text">Get recommendations for group members or panel members, and access to research studies!</div>
         </div>
         <form class="search_container" action="{% url 'home' %}" method="GET">
-            {% csrf_token %}
             <input name="search" class="search_text" type="text" id="input" placeholder="Search...">
             <button class="search_btn">
                 <img src="{% static 'images/search.svg' %}" alt="">
