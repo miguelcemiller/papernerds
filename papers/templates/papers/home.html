@@ -7,19 +7,22 @@
 <section class="cards">
    
     {% for paper in papers %}
-    <div class="paper_card">
-        <div class="paper_details">
-            <div class="paper_title" value="{{ paper.title }}" search="{{ search }}">{{ paper.title }}</div>
-            <div class="subtitle_container">
-                <div class="paper_views">{{ paper.downloads }} views</div>
-                <div class="paper_author">Author1, Author2, Author 3 {{ paper.year }}</div>
+    <a href="{% url 'paper' paper.id %}" style="text-decoration: none;">
+        <div class="paper_card">
+            <div class="paper_details">
+                <div class="paper_title" value="{{ paper.title }}" search="{{ search }}">{{ paper.title }}</div>
+                <div class="subtitle_container">
+                    <div class="paper_views">{{ paper.downloads }} views</div>
+                    <div class="paper_author">Author1, Author2, Author 3 {{ paper.year }}</div>
+                </div>
+                <div class="paper_abstract" class="abstract" value="{{ paper.abstract }}" search="{{ search }}">
+                    {{ paper.abstract|slice:":240"}}...
+                </div>  
             </div>
-            <div class="paper_abstract" class="abstract" value="{{ paper.abstract }}" search="{{ search }}">
-                {{ paper.abstract|slice:":240"}}...
-            </div>  
         </div>
-    </div>
+    </a>
     {% endfor %}
+    
 </section>
 
 

@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+<div class="paper_card_full">
+    <div class="paper_details_full">
+        <div class="paper_title">
+            {{ paper.title }}
+        </div>
+
+        <p>Abstract</p>
+        <div class="paper_abstract">
+            {{ paper.abstract }}
+        </div>  
+
+        <div class="separator"></div>
+
+        <p>Student Researchers</p>
+        <ul class="student_researchers">
+            <li>Miguel N. Cemiller</li>
+            <li>Jian Carlo C. Carayap</li>
+            <li>Airha M. Villanueva</li>
+        </ul>
+
+        <div class="separator"></div>
+        <p>Technical Panel</p>
+        <ul class="technical_panel">
+            <li>
+                <div>Mia V. Villarica, DIT</div>
+                <span>Research Adviser</span>
+            </li>
+            <li>
+                <div>Jonardo Ricasa Asor</div>
+                <span>Subject Specialist</span>
+            </li>
+            <li>
+                <div>Alliana M. Ablan</div>
+                <span>Technical Editor</span>
+            </li>
+            <li>
+                <div>Victor Estalilla</div>
+                <span>Statistician</span>
+            </li>
+            <li>
+                <div>Cezzane Dimaculangan</div>
+                <span>Language Critic</span>
+            </li>
+        </ul>
+
+        <div class="separator"></div>
+        <p>Undergraduate Program</p>
+        <div class="undergrad_program">Bachelor of Science in Computer Science (BSCS)</div>
+        <div class="separator"></div>
+        <p>Year</p>
+        <div class="year">{{paper.year}}</div>
+        <div class="separator"></div>
+        <p>Views</p>
+        <div class="views">{{ paper.downloads }}</div>
+    </div>
+
+    <a href="{% url 'login' %}"><button class="btn btn_secondary">View</button></a>
+
+</div>
+
+<div class="more_container">
+    <div class="more_like_this">More Like This</div>
+</div>
+
+
+
+<script type="text/javascript">
+// Get div content
+    string = $('.paper_abstract').text()
+    // Replace all carriage returns or new lines with an HTML line break.
+
+    // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
+
+    $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
+
+</script>
+
+
+{% endblock content %}

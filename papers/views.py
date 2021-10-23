@@ -163,7 +163,7 @@ def paperView(request, pk):
     paper = Paper.objects.get(id=pk)
 
     context = {'paper': paper}
-    return render(request, context)
+    return render(request, 'papers/paper.html', context)
 
 
 

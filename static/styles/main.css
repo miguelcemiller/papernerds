@@ -777,6 +777,7 @@ header {
 
 /* Paper Card */
 
+
 .cards {
     display: flex;
     flex-direction: column;
@@ -785,9 +786,14 @@ header {
     height: 697px;
     margin-top: 30px;
     margin-bottom: 30px;
+
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
+.cards > a {
+    width: 694px;
+}
 
 .paper_card {
     width: 694px;
@@ -841,7 +847,6 @@ header {
 .pagination {
     margin-bottom: 90px;
 }
-
 .pagination_nav {
     text-align: center;
 
@@ -882,6 +887,108 @@ background-color: var(--card-hover);
 /* End Home */
 
 
+/* Paper.html */
+
+
+.paper_card_full {
+    width: 694px;
+    background: var(--background);
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    padding: 20px 45px 15px 25px;
+    margin: 0 auto;
+
+    margin-top: 30px;
+
+}
+
+.paper_details_full > p {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-secondary);
+
+    padding-top: 20px;
+    padding-bottom: 3px;
+}
+
+.paper_details_full .paper_title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 0.1px;
+}
+
+.paper_details_full .paper_abstract {
+    text-align: justify;
+}
+
+br {
+    display: block;
+    content: "";
+    margin-top: 12px; 
+}
+
+.separator {
+    margin-top: 20px;
+    display: block;
+    height: 1px;
+    background-color: var(--line);
+}
+
+.student_researchers, .technical_panel {
+    list-style: none;
+}
+
+.student_researchers > li, .technical_panel > li > div, .undergrad_program, .year, .views {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.student_researchers, .technical_panel > li:not(:last-child) {
+    padding-bottom: 3px;
+}
+
+
+.technical_panel > li > span {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: -2px;
+}
+
+.paper_card_full > a > button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.more_container {
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.more_like_this {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-secondary);
+
+    padding-top: 20px;
+    padding-bottom: 3px;
+
+}
+
+
+
+/* End Paper.html */
+
+
 
 
 
@@ -893,6 +1000,7 @@ footer {
     width: 100%;
 
     margin-top: auto;
+    
 }
 .footer {
     display: flex;
