@@ -1,3 +1,4 @@
+from abc import abstractclassmethod
 from django.shortcuts import render
 from . models import Paper
 from . tf_idf import preprocess, create_tfidf_features, calculate_similarity, show_similar_documents
@@ -50,19 +51,19 @@ def homeView(request):
             #papers = Paper.objects.filter(abstract__in=abstract_list)
             papers = filter__in_preserve(Paper.objects, 'abstract', abstract_list).all()
 
-            custom_range, papers = paginate_papers(request, papers)
+            custom_range, papers = paginate_papers(request, papers, 4)
 
         else:
             # empty search
             papers = Paper.objects.all()
 
-            custom_range, papers = paginate_papers(request, papers)
+            custom_range, papers = paginate_papers(request, papers, 4)
   
     else:
         # no search
         papers = Paper.objects.all()
 
-        custom_range, papers = paginate_papers(request, papers)
+        custom_range, papers = paginate_papers(request, papers, 4)
 
     context = {'papers': papers, 'search': search, 'custom_range': custom_range}
     return render(request, 'papers/home.html', context)
@@ -92,17 +93,18 @@ def paperView(request, pk):
     # loop through each check each first index topic distributions
     title_list = []
 
-    for title, abstract in zip(df['title'], df['abstract']):
-        loop_topic_distrib = topic_distrib(abstract)
-        
-        if loop_topic_distrib[0] == current_topic_distrib[0]:
-            #print(title)
-            #print(all_topic_distrib, abs)
-            title_list.append(title)
-            
+    for index in current_topic_distrib: # [1, 0, 5]
+        for title, abstract in zip(df['title'], df['abstract']):
+            loop_topic_distrib = topic_distrib(abstract) # get topic distrib for each doc [1, 0, 6], [1, 0, 5]
 
-    related_papers = filter__in_preserve(Paper.objects, 'title', title_list).all()
+            if loop_topic_distrib[0] == index:
+                print(loop_topic_distrib)
+                title_list.append(title)
+
         
+    related_papers = filter__in_preserve(Paper.objects, 'title', title_list).all()
+
+    #custom_range, related_papers = paginate_papers(request, related_papers, 2)
 
     context = {'paper': paper, 'related_papers': related_papers}
     return render(request, 'papers/paper.html', context)

@@ -47,10 +47,10 @@ def topic_distrib(abstract):
 
 
 # pagination
-def paginate_papers(request, papers):
+def paginate_papers(request, papers, items):
     page = request.GET.get('page')
 
-    paginator = Paginator(papers, 4)
+    paginator = Paginator(papers, items)
 
     try:
         papers = paginator.page(page)

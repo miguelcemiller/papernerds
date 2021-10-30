@@ -11,7 +11,7 @@
         </div>
 
         <p>Abstract</p>
-        <div class="paper_abstract">
+        <div class="paper_abstract line_break">
             {{ paper.abstract }}
         </div>  
 
@@ -66,37 +66,55 @@
 
 
 
+
 <section class="cards">
-   
-    {% for related_paper in related_papers %}
-    <a href="{% url 'paper' related_paper.id %}" style="text-decoration: none;">
+    <div class="heading">Related Papers</div>
+    {% for related in related_papers %}
+    <a href="{% url 'paper' related.id %}" style="text-decoration: none;" class="content">
         <div class="paper_card">
             <div class="paper_details">
-                <div class="paper_title" value="{{ related_paper.title }}" search="{{ search }}">{{ related_paper.title }}</div>
+                <div class="paper_title" value="{{ related_paper.title }}" search="{{ search }}">{{ related.title }}</div>
                 <div class="subtitle_container">
-                    <div class="paper_views">{{ related_paper.downloads }} views</div>
-                    <div class="paper_author">Author1, Author2, Author 3 {{ related_paper.year }}</div>
+                    <div class="paper_views">{{ related.downloads }} views</div>
+                    <div class="paper_author">Author1, Author2, Author 3 {{ related.year }}</div>
                 </div>
-                <div class="paper_abstract" class="abstract" value="{{ related_paper.abstract }}" search="{{ search }}">
-                    {{ related_paper.abstract|slice:":240"}}...
+                <div class="paper_abstract" class="abstract" value="{{ related.abstract }}" search="{{ search }}">
+                    {{ related.abstract|slice:":240"}}...
                 </div>  
-            </div>
+             </div>
         </div>
     </a>
     {% endfor %}
-    
+    <button id="load_more">Load More</button>
 </section>
+
+
 
 
 
 <script type="text/javascript">
 // Get div content
-    string = $('.paper_abstract').text()
+    string = $('.line_break').text()
     // Replace all carriage returns or new lines with an HTML line break.
 
     // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
 
-    $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
+    $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
+
+    $(document).ready(function(){
+        $(".content").slice(0, 2).show(); 
+        $("#load_more").on("click", function(e){
+            e.preventDefault();
+            $(".content:hidden").slice(0, 2).slideDown(); 
+            if($(".content:hidden").length == 0) {
+             $("#load_more").text("No Content").addClass("noContent");
+            }
+  });
+
+});
+  
+
+
 
 </script>
 
