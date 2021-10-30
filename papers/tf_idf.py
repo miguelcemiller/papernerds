@@ -25,7 +25,7 @@ def preprocess(title, body):
     text = re.sub("(\\d|\\W)+"," ", text).strip()
     return text
 
-def create_tfidf_features(corpus, max_features=5000, max_df=0.95, min_df=2):
+def create_tfidf_features(corpus, max_features=None, max_df=0.95, min_df=2):
     """ Creates a tf-idf matrix for the `corpus` using sklearn. """
     tfidf_vectorizor = TfidfVectorizer(decode_error='replace', strip_accents='unicode', analyzer='word',
                                        stop_words='english', ngram_range=(1, 1), max_features=max_features,

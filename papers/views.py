@@ -14,6 +14,10 @@ from . tf_idf import preprocess, create_tfidf_features, calculate_similarity, sh
 import time
 import pandas as pd
 
+import gensim
+import gensim.corpora as corpora
+from gensim.utils import simple_preprocess
+
 
 def homeView(request):
 
@@ -161,6 +165,43 @@ def homeView(request):
 
 def paperView(request, pk):
     paper = Paper.objects.get(id=pk)
+
+
+    # load paper abstract
+    abstract = paper.abstract
+
+    # load model and dict
+    new_model = gensim.models.ldamodel.LdaModel.load("models/lda.model")
+    lda_dict = corpora.Dictionary.load('models/lda.model.id2word')
+
+    # topic distributions
+    doc = lda_dict.doc2bow(abstract.split())
+    vector = new_model.get_document_topics(doc)
+    
+    print(vector)
+
+    # sort vector
+    def Sort(sub_li):
+        sub_li.sort(key = lambda x:x[1])
+        sub_li.reverse()
+        return (sub_li)
+
+    vector = Sort(vector)
+
+    print(vector) # returns sorted topic distributions
+
+    # get only index in list
+    topic_list = [item[0] for item in vector]
+    print(topic_list)
+
+
+    # all documents with topic_list return all
+    #corpus_abstracts = Paper.objects.values('title', 'abstract')
+    current_title = paper.title
+    corpus_abstracts = Paper.objects.values('title', 'abstract').exclude(title=current_title)
+    #print(corpus_abstracts)
+    
+
 
     context = {'paper': paper}
     return render(request, 'papers/paper.html', context)
