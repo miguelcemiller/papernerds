@@ -64,10 +64,28 @@
 
 </div>
 
-<div class="more_container">
-    <div class="more_like_this">More Like This</div>
-    <div>Print topic distributions</div>
-</div>
+
+
+<section class="cards">
+   
+    {% for related_paper in related_papers %}
+    <a href="{% url 'paper' related_paper.id %}" style="text-decoration: none;">
+        <div class="paper_card">
+            <div class="paper_details">
+                <div class="paper_title" value="{{ related_paper.title }}" search="{{ search }}">{{ related_paper.title }}</div>
+                <div class="subtitle_container">
+                    <div class="paper_views">{{ related_paper.downloads }} views</div>
+                    <div class="paper_author">Author1, Author2, Author 3 {{ related_paper.year }}</div>
+                </div>
+                <div class="paper_abstract" class="abstract" value="{{ related_paper.abstract }}" search="{{ search }}">
+                    {{ related_paper.abstract|slice:":240"}}...
+                </div>  
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+    
+</section>
 
 
 
