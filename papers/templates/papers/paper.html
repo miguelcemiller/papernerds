@@ -3,120 +3,116 @@
 
 {% block content %}
 
+<section class="grid_container">
 
-<div class="paper_card_full">
-    <div class="paper_details_full">
-        <div class="paper_title">
-            {{ paper.title }}
+    <div class="paper_card_full">
+        <div class="paper_details_full">
+            <div class="paper_title">
+                {{ paper.title }}
+            </div>
+    
+            <p>Abstract</p>
+            <div class="paper_abstract line_break">
+                {{ paper.abstract }}
+            </div>  
+    
+            <div class="separator"></div>
+    
+            <p>Student Researchers</p>
+            <ul class="student_researchers">
+                <li>Miguel N. Cemiller</li>
+                <li>Jian Carlo C. Carayap</li>
+                <li>Airha M. Villanueva</li>
+            </ul>
+    
+            <div class="separator"></div>
+            <p>Technical Panel</p>
+            <ul class="technical_panel">
+                <li>
+                    <div>Mia V. Villarica, DIT</div>
+                    <span>Research Adviser</span>
+                </li>
+                <li>
+                    <div>Jonardo Ricasa Asor</div>
+                    <span>Subject Specialist</span>
+                </li>
+                <li>
+                    <div>Alliana M. Ablan</div>
+                    <span>Technical Editor</span>
+                </li>
+                <li>
+                    <div>Victor Estalilla</div>
+                    <span>Statistician</span>
+                </li>
+                <li>
+                    <div>Cezzane Dimaculangan</div>
+                    <span>Language Critic</span>
+                </li>
+            </ul>
+    
+            <div class="separator"></div>
+            <p>Undergraduate Program</p>
+            <div class="undergrad_program">Bachelor of Science in Computer Science (BSCS)</div>
+            <div class="separator"></div>
+            <p>Year</p>
+            <div class="year">{{paper.year}}</div>
+            <div class="separator"></div>
+            <p>Views</p>
+            <div class="views">{{ paper.downloads }}</div>
         </div>
-
-        <p>Abstract</p>
-        <div class="paper_abstract line_break">
-            {{ paper.abstract }}
-        </div>  
-
-        <div class="separator"></div>
-
-        <p>Student Researchers</p>
-        <ul class="student_researchers">
-            <li>Miguel N. Cemiller</li>
-            <li>Jian Carlo C. Carayap</li>
-            <li>Airha M. Villanueva</li>
-        </ul>
-
-        <div class="separator"></div>
-        <p>Technical Panel</p>
-        <ul class="technical_panel">
-            <li>
-                <div>Mia V. Villarica, DIT</div>
-                <span>Research Adviser</span>
-            </li>
-            <li>
-                <div>Jonardo Ricasa Asor</div>
-                <span>Subject Specialist</span>
-            </li>
-            <li>
-                <div>Alliana M. Ablan</div>
-                <span>Technical Editor</span>
-            </li>
-            <li>
-                <div>Victor Estalilla</div>
-                <span>Statistician</span>
-            </li>
-            <li>
-                <div>Cezzane Dimaculangan</div>
-                <span>Language Critic</span>
-            </li>
-        </ul>
-
-        <div class="separator"></div>
-        <p>Undergraduate Program</p>
-        <div class="undergrad_program">Bachelor of Science in Computer Science (BSCS)</div>
-        <div class="separator"></div>
-        <p>Year</p>
-        <div class="year">{{paper.year}}</div>
-        <div class="separator"></div>
-        <p>Views</p>
-        <div class="views">{{ paper.downloads }}</div>
+    
+        <a href="{% url 'login' %}"><button class="btn btn_secondary">View</button></a>
     </div>
 
-    <a href="{% url 'login' %}"><button class="btn btn_secondary">View</button></a>
-
-</div>
-
+    <!-- <div class="sidebar">
+    </div> -->
 
 
+    <div class="cards related_papers">
+        <div class="heading">Related Papers</div>
+        {% for related in related_papers %}
+        <a href="{% url 'paper' related.id %}" style="text-decoration: none;" class="content">
+            <div class="paper_card">
+                <div class="paper_details">
+                    <div class="paper_title" value="{{ related_paper.title }}" search="{{ search }}">{{ related.title }}</div>
+                    <div class="subtitle_container">
+                        <div class="paper_views">{{ related.downloads }} views</div>
+                        <div class="paper_author">Author1, Author2, Author 3 {{ related.year }}</div>
+                    </div>
+                    <div class="paper_abstract" class="abstract" value="{{ related.abstract }}" search="{{ search }}">
+                        {{ related.abstract|slice:":240"}}...
+                    </div>  
+                 </div>
+            </div>
+        </a>
+        {% endfor %}
+        <button id="load_more" class="btn btn_tertiary">Load More</button>
+    </div>
 
-<section class="cards">
-    <div class="heading">Related Papers</div>
-    {% for related in related_papers %}
-    <a href="{% url 'paper' related.id %}" style="text-decoration: none;" class="content">
-        <div class="paper_card">
-            <div class="paper_details">
-                <div class="paper_title" value="{{ related_paper.title }}" search="{{ search }}">{{ related.title }}</div>
-                <div class="subtitle_container">
-                    <div class="paper_views">{{ related.downloads }} views</div>
-                    <div class="paper_author">Author1, Author2, Author 3 {{ related.year }}</div>
-                </div>
-                <div class="paper_abstract" class="abstract" value="{{ related.abstract }}" search="{{ search }}">
-                    {{ related.abstract|slice:":240"}}...
-                </div>  
-             </div>
-        </div>
-    </a>
-    {% endfor %}
-    <button id="load_more">Load More</button>
+
+
+    <script type="text/javascript">
+        // Get div content
+            string = $('.line_break').text()
+            // Replace all carriage returns or new lines with an HTML line break.
+        
+            // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
+        
+            $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
+        
+            $(document).ready(function(){
+                $(".content").slice(0, 2).show(); 
+                $("#load_more").on("click", function(e){
+                    e.preventDefault();
+                    $(".content:hidden").slice(0, 2).slideDown(); 
+                    if($(".content:hidden").length == 0) {
+                     $("#load_more").text("No Content").addClass("noContent");
+                    }
+          });
+        });
+          
+        </script>
+
 </section>
-
-
-
-
-
-<script type="text/javascript">
-// Get div content
-    string = $('.line_break').text()
-    // Replace all carriage returns or new lines with an HTML line break.
-
-    // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
-
-    $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
-
-    $(document).ready(function(){
-        $(".content").slice(0, 2).show(); 
-        $("#load_more").on("click", function(e){
-            e.preventDefault();
-            $(".content:hidden").slice(0, 2).slideDown(); 
-            if($(".content:hidden").length == 0) {
-             $("#load_more").text("No Content").addClass("noContent");
-            }
-  });
-
-});
-  
-
-
-
-</script>
-
 
 {% endblock content %}

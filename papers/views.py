@@ -51,6 +51,7 @@ def homeView(request):
             #papers = Paper.objects.filter(abstract__in=abstract_list)
             papers = filter__in_preserve(Paper.objects, 'abstract', abstract_list).all()
 
+            
             custom_range, papers = paginate_papers(request, papers, 4)
 
         else:

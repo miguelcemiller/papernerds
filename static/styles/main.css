@@ -89,7 +89,7 @@ body {
     background-color: var(--background);
     font-family: 'Poppins', sans-serif;
 
-    min-width: 500px;
+    min-width: 320px; /* smallest width screen */
 
     min-height: 100vh;
     min-height: -webkit-fill-available;
@@ -97,6 +97,8 @@ body {
 
     display: flex;
     flex-direction: column;
+
+    overflow-x: hidden; /* disable horziontal scroll */
 }
 
 
@@ -134,10 +136,6 @@ header {
     margin-right: var(--nav-gap);
 }
 
-.footer_logo {
-    cursor: pointer;
-    height: 23px;
-}
 
 .search_container {
     display: flex;
@@ -785,7 +783,7 @@ header {
 
     height: 697px;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 120px;
 
     margin-left: auto;
     margin-right: auto;
@@ -889,20 +887,30 @@ background-color: var(--card-hover);
 
 /* Paper.html */
 
+.grid_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    padding: 0 var(--page-gutter);
+}
 
 .paper_card_full {
-    width: 694px;
+    grid-column: 2 / 4;
+    justify-self: center;
+    align-self: start;
+
+    width: 100%;
+    max-width: 694px;
+    min-width: 364px; /* smallest width paper card */
     background: var(--background);
 
     border: 1px solid var(--line);
     border-radius: 18px;
 
-    padding: 20px 45px 15px 25px;
-    margin: 0 auto;
-
+    padding: 20px 25px;
     margin-top: 30px;
-
 }
+
 
 .paper_details_full > p {
     font-weight: 600;
@@ -965,38 +973,42 @@ br {
     margin-top: 20px;
 }
 
-.more_container {
-    margin: 0 auto;
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+.related_papers {
+    grid-column: 2 / 4;
+    justify-self: center;
+    align-self: start;
+
+    margin-top: 50px;
+    height: auto;
+
+    width: 100%;
+    max-width: 694px;
+    min-width: 364px; /* smallest width paper card */
 }
 
-
-.more_like_this {
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--text-secondary);
-
-    padding-top: 20px;
-    padding-bottom: 3px;
-
+.related_papers a, .related_papers .paper_card {
+    width: 100%;
+    max-width: 694px;
+    min-width: 364px; /* smallest width paper card */
 }
-
-
-
-/* End Paper.html */
-
 
 .heading {
     font-weight: 600;
     font-size: 16px;
     color: var(--text-secondary);
-
-    padding-top: 20px;
-    padding-bottom: 3px;
 }
+
+.btn_tertiary {
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+
+.btn_tertiary:hover {
+    background-color: var(--card-hover);
+    color: var(--text-primary);
+}
+
 
 .content {
     display: none;
@@ -1007,14 +1019,19 @@ br {
     background-color: transparent !important;
     pointer-events: none;
   }
+
+/* End Paper.html */
+
+
+
 /* Footer */
 
 footer {
-    background-color: #2D2831;
-
+    /*background-color: #2D2831;*/
+    background-color: var(--background);
     width: 100%;
-
     margin-top: auto;
+    border-top: 1px solid var(--line);
     
 }
 .footer {
@@ -1033,12 +1050,25 @@ footer {
 }
 
 
-.nav_social > a:not(:last-child) {
-    margin-right: 25px;
+.copyright {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+
+    margin-right: var(--nav-gap);
+}
+
+
+.footer_logo {
+    cursor: pointer;
+    height: 18px;
+
+    margin-right: var(--nav-gap);
 }
 
 .mode_toggle {
-    background-color: var(--primary);
+    background-color: var(--text-secondary);
     border-radius: 20px;
     width: 72px;
     height: 27px;
@@ -1052,7 +1082,7 @@ footer {
 }
 
 .mode_toggle .toggle_circle {
-    background-color: #E8E1EE;
+    background-color: var(--background);
     border-radius: 50%;
     width: 18px;
     height: 18px;
@@ -1063,7 +1093,7 @@ footer {
 .mode_toggle .mode_text {
     font-size: 12px;
     font-weight: 600;
-    color: #E8E1EE;
+    color: var(--background);
 }
 
 
