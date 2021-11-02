@@ -6,13 +6,27 @@
 {% load static %}
 <div class="overlay">
     <div class="overlay_login">
-        <div>Log in to Papernerds</div>
-        <form class="login_form" action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            <input class="form_text" type="" name="username" placeholder="Username">
-            <input class="form_text" type="password" name="password" placeholder="Password">
-            <input class="form_btn" type="submit" value="Log In">
-        </form>
+        <div class="login_header">
+            <div class="header_title">Log in</div>
+            <div class="close_wrapper">
+                <img src="{% static 'images/close.svg' %}">
+            </div>
+        </div>
+        
+        <div class="login_details">
+            <form class="login_form" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <input class="form_input" type="" name="username" placeholder="Username">
+                <input class="form_input" type="password" name="password" placeholder="Password">
+                <input class="btn form_btn" type="submit" value="Log in">
+                <div class="form_forgot">Forgot your password?</div>
+            </form>
+        </div>
+
+        <div class="login_footer">
+            <div class="separator footer_separator"></div>
+            <div class="footer_text">Don't have an account? <span>Sign up</span></div>
+        </div>
     </div>
 </div>
 
@@ -138,7 +152,7 @@
     });
 
 
-    $(".overlay").on("click", function() {
+    $(".close_wrapper").on("click", function() {
         $(".overlay").css("display", "none");
         $('body').css('overflow-y', 'auto'); // Enable vertical scroll
     });
