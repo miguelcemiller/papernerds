@@ -4,7 +4,20 @@
 {% block content %}
 
 {% load static %}
+<div class="overlay">
+    <div class="overlay_login">
+        <div>Log in to Papernerds</div>
+        <form class="login_form" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input class="form_text" type="" name="username" placeholder="Username">
+            <input class="form_text" type="password" name="password" placeholder="Password">
+            <input class="form_btn" type="submit" value="Log In">
+        </form>
+    </div>
+</div>
+
 <section class="grid_container">
+
 
     <div class="paper_card_full">
         <div class="paper_details_full">
@@ -62,7 +75,11 @@
             <div class="views">{{ paper.downloads }}</div>
         </div>
     
-        <a href="{% static 'images/papers/' %}{{paper.pdf_name}}.pdf" target="_blank" class="view"><button class="btn btn_secondary">View</button></a>
+        {% if request.user.is_authenticated %}
+        <a href="{% static 'images/papers/' %}{{paper.pdf_name}}.pdf" target="_blank"><button class="btn btn_secondary">View</button></a>
+        {% else %}
+        <a class="view"><button class="btn btn_secondary">View</button></a>
+        {% endif %}
     </div>
 
     <!-- <div class="sidebar">
@@ -88,33 +105,51 @@
         {% endfor %}
         <button id="load_more" class="btn btn_tertiary">Load More</button>
     </div>
-
-
-
-    <script type="text/javascript">
-        // Get div content
-        string = $('.line_break').text()
-        // Replace all carriage returns or new lines with an HTML line break.
-    
-        // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
-    
-        $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
-    
-        $(document).ready(function(){
-            $(".content").slice(0, 2).show(); 
-            $("#load_more").on("click", function(e){
-                e.preventDefault();
-                $(".content:hidden").slice(0, 2).slideDown(); 
-                if($(".content:hidden").length == 0) {
-                    $("#load_more").text("No Content").addClass("noContent");
-                }
-          });
-        });
-
-
-          
-    </script>
-
 </section>
+
+
+
+
+
+<script type="text/javascript">
+    // Get div content
+    string = $('.line_break').text()
+    // Replace all carriage returns or new lines with an HTML line break.
+
+    // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
+
+    $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
+
+    $(document).ready(function(){
+        $(".content").slice(0, 2).show(); 
+        $("#load_more").on("click", function(e){
+            e.preventDefault();
+            $(".content:hidden").slice(0, 2).slideDown(); 
+            if($(".content:hidden").length == 0) {
+                $("#load_more").text("No Content").addClass("noContent");
+            }
+      });
+    });
+
+ 
+    $(".view").on("click", function() {
+        $(".overlay").css("display", "flex");
+        $('body').css('overflow-y', 'hidden'); // Disable vertical scroll on modal
+    });
+
+
+    $(".overlay").on("click", function() {
+        $(".overlay").css("display", "none");
+        $('body').css('overflow-y', 'auto'); // Enable vertical scroll
+    });
+
+    $(".overlay_login").on("click", function(e) {
+         e.stopPropagation()
+    });
+
+    
+
+   
+</script>
 
 {% endblock content %}

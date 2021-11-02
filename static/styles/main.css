@@ -1031,21 +1031,36 @@ br {
   }
 
 
-/*
-@media (min-width: 768px) {
-    .paper_card_full {
-        max-width: 694px;
-        min-width: 694px;
-    }
-} 
+/* overlay */
+.overlay {
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
 
-@media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
 
-    .paper_card_full {
-        max-width: 694px;
-        min-width: 324px;
-    }
-} */
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2;
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+.overlay_login {
+    width: 500px;
+    height: 600px;
+    background-color: var(--background);
+    
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    padding: 17px 25px;
+    cursor: default;
+}
 
 /* End Paper.html */
 
