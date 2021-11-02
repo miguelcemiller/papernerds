@@ -29,7 +29,7 @@
         <ul class="pagination_nav">
 
             {% if papers.has_previous %}
-            <li><a href="?page={{papers.previous_page_number}}" class="page_link" page-value="{{papers.previous_page_number}}">&#10094; Prev</a></li>
+            <li><a href="?page={{papers.previous_page_number}}" class="page_link" page-value="{{papers.previous_page_number}}">&#10094;</a></li>
             {% endif %}
 
             {% for page in custom_range %}
@@ -41,7 +41,7 @@
             {% endfor %}
 
             {% if papers.has_next %}
-            <li><a href="?page={{papers.next_page_number}}" class="page_link" page-value="{{papers.next_page_number}}">Next &#10095;</a></li>
+            <li><a href="?page={{papers.next_page_number}}" class="page_link" page-value="{{papers.next_page_number}}">&#10095;</a></li>
             {% endif %}
         </ul>
     </div>

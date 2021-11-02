@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
-from . forms import LoginForm
+
 from django.contrib.auth.models import User
 
 
@@ -14,7 +15,13 @@ def loginView(request):
         username= request.POST['username']
         password = request.POST['password']
 
+        try:
+            user = User.objects.get(username=username)
+        except:
+            print("Username does not exist")
+
         user = authenticate(request, username=username, password=password)
+     
 
         if user is not None:
             login(request, user)

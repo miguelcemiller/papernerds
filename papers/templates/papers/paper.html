@@ -3,6 +3,7 @@
 
 {% block content %}
 
+{% load static %}
 <section class="grid_container">
 
     <div class="paper_card_full">
@@ -61,7 +62,7 @@
             <div class="views">{{ paper.downloads }}</div>
         </div>
     
-        <a href="{% url 'login' %}"><button class="btn btn_secondary">View</button></a>
+        <a href="{% static 'images/papers/' %}{{paper.pdf_name}}.pdf" target="_blank" class="view"><button class="btn btn_secondary">View</button></a>
     </div>
 
     <!-- <div class="sidebar">
@@ -92,25 +93,27 @@
 
     <script type="text/javascript">
         // Get div content
-            string = $('.line_break').text()
-            // Replace all carriage returns or new lines with an HTML line break.
-        
-            // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
-        
-            $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
-        
-            $(document).ready(function(){
-                $(".content").slice(0, 2).show(); 
-                $("#load_more").on("click", function(e){
-                    e.preventDefault();
-                    $(".content:hidden").slice(0, 2).slideDown(); 
-                    if($(".content:hidden").length == 0) {
-                     $("#load_more").text("No Content").addClass("noContent");
-                    }
+        string = $('.line_break').text()
+        // Replace all carriage returns or new lines with an HTML line break.
+    
+        // $('.paper_abstract').html(string.replace(/(\r|\n\n)/g, '<br/><br/><p style="text-indent: 30px;">'))
+    
+        $('.line_break').html(string.replace(/(\r|\n\n)/g, '<br/><br/>'))
+    
+        $(document).ready(function(){
+            $(".content").slice(0, 2).show(); 
+            $("#load_more").on("click", function(e){
+                e.preventDefault();
+                $(".content:hidden").slice(0, 2).slideDown(); 
+                if($(".content:hidden").length == 0) {
+                    $("#load_more").text("No Content").addClass("noContent");
+                }
           });
         });
+
+
           
-        </script>
+    </script>
 
 </section>
 
