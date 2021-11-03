@@ -6,7 +6,7 @@
 <section class="grid_container">
         <div class="cards">
             {% for paper in papers %}
-            <a href="{% url 'paper' paper.id %}" style="text-decoration: none;">
+            <a href="{% url 'paper' paper.slug %}" style="text-decoration: none;">
                 <div class="paper_card">
                     <div class="paper_details">
                         <div class="paper_title" value="{{ paper.title }}" search="{{ search }}">{{ paper.title }}</div>

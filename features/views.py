@@ -70,7 +70,7 @@ def resultsView(request):
             #get the corpus
             corpus = Paper.objects.values('title', 'abstract')
 
-            # If corpus is not None
+            # If corpus is not None, process corpus
             res = [ele for ele in corpus]
 
             if bool(res) is not False: 
@@ -141,8 +141,8 @@ def homeView(request):
     return render(request, 'features/home.html', context)
 
 
-def paperView(request, pk):
-    paper = Paper.objects.get(id=pk)
+def paperView(request, slug):
+    paper = Paper.objects.get(slug=slug)
 
     # current paper title, abstract
     current_title = paper.title
