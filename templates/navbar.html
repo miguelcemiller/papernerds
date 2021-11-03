@@ -12,7 +12,7 @@
         <!-- nothing -->
         
         {% else %}
-        <form id="search_form" class="search_container" action="" method="GET">
+        <form id="search_form" class="search_container" action="{% url 'results' %}" method="GET">
             <input name="search" class="search_text" type="text" id="input" placeholder="Search...">
             <button class="search_btn">
                 <img src="{% static 'images/search.svg'%}" >

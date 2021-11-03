@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="hero_container">
+    <div class="hero_left_body">
+        <div class="hero_text_container">
+            <h1 class="main_text">The world revolves around papers.</h1>
+            <div class="sub_text">Get recommendations for group members or panel members, and access to research studies!</div>
+        </div>
+        <form class="search_container" action="{% url 'results' %}" method="GET">
+            <input name="search" class="search_text" type="text" id="input" placeholder="Search...">
+            <button class="search_btn">
+                <img src="{% static 'images/search.svg' %}" alt="">
+            </button>
+        </form>
+    </div>
+    <div class="hero_right_body">
+        <div class="main_images">
+            <img class="ikbal_1" src="{% static 'images/ikbal_1.png' %}" alt="">
+            <img class="other_03" src="{% static 'images/other_03.png' %}"alt="">
+            <img class="other_08" src="{% static 'images/other_08.png' %}"alt="">
+        </div>
+    </div>
+</div>
+
+<div class="section2">
+    <div class="rotate_div">
+        <img class="rotate_img" src="{% static 'images/rotate.svg' %}" alt="">
+    </div>
+    <div class="recommends_container">
+        <div class="recommends_left_body">
+            <div class="r_images">
+                <img class="ikbal_2" src="{% static 'images/ikbal_2.png' %}" alt="">
+                <img class="other_18" src="{% static 'images/other_18.png' %}" alt="">
+            </div>
+        </div>
+        <div class="recommends_right_body">
+            <div class="recommends_text_container">
+                <h1 class="r_main_text"><span>Recommends</span> group and panel members.</h1>
+                <div class="r_sub_text">Papier uses algorithms to generate recommendations for the best possible results.</div>
+                <button class="btn r_btn">Learn More</button>
+            </div>
+        </div>
+    </div>
+    <div class="rotate_div2">
+        <img class="rotate_img2" src="{% static 'images/rotate2.svg' %}" alt="">
+    </div>
+</div>
+
+
+<div class="section3">
+    <div class="access_container">
+        <div class="access_left_body">
+            <div class="access_text_container">
+                <h1 class="a_main_text"><span>Access</span> to research papers. No hassle.</h1>
+                <div class="a_sub_text">Provides open access to research papers of graduate students of IT/CS in LSPU SCC Campus.</div>
+                <button class="btn r_btn">Learn More</button>
+            </div>
+        </div>
+        <div class="access_right_body">
+            <div class="a_images">
+                <img class="ikbal_5" src="{% static 'images/ikbal_5.png' %}" alt="">
+                <img class="other_07" src="{% static 'images/other_07.png' %}"alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
