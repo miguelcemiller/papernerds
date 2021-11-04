@@ -850,8 +850,10 @@ header {
 
 .flex_container_paper {
     display: flex;
-    gap: 30px;
+    flex-direction: row;
     justify-content: center;
+    gap: 30px;
+    
     padding: 0 var(--page-gutter);
 }
 
@@ -939,13 +941,12 @@ br {
 /* Related Papers */
 
 .related_papers {
-
     background-color: var(--text-field);
     border-radius: 18px;
     height: min-content;
 
     max-width: 300px;
-    min-width: 200px;
+    min-width: 300px;
 
     margin-top: 30px;
     margin-bottom: 30px;
@@ -965,12 +966,16 @@ br {
 .related_papers a {
     text-decoration: none;
     width: 100%;
+    max-width: 300px;
+    min-width: 300px;
 }
 .related_paper_card {
     display: flex;
     flex-direction: column;
     gap: 4px;
     width: 100%;
+    max-width: 300px;
+    min-width: 300px;
 
     padding: 10px 25px;
 }
@@ -1288,6 +1293,24 @@ footer a {
 
 /* Media Queries -- needs to be after everything else */
 
+@media screen and (max-width: 900px) {
+    .flex_container_paper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .related_papers, .related_papers > a, .related_papers .related_paper_card {
+        margin-top: 0;
+
+        max-width: 694px;
+        min-width: 200px;
+    }
+
+    .paper_card_full {
+        margin-bottom: 0;
+    }
+}
+
 @media screen and (max-width: 600px) {
     :root {
         --nav-gap: 18px;
@@ -1328,10 +1351,6 @@ footer a {
 
     .cards a:not(:last-of-type) .paper_card{
         border-bottom: 0;
-    }
-
-    .related_papers .heading {
-        padding-left: 25px;
     }
     
 }
