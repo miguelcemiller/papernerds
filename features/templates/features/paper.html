@@ -30,8 +30,7 @@
     </div>
 </div>
 
-<section class="grid_container">
-
+<section class="flex_container_paper">
 
     <div class="paper_card_full">
         <div class="paper_details_full">
@@ -96,28 +95,20 @@
         {% endif %}
     </div>
 
-    <!-- <div class="sidebar">
-    </div> -->
 
-    <div class="cards related_papers">
-        <div class="heading">Related Papers</div>
+    <div class="related_papers">
+        <div class="related_papers_heading">Related Papers</div>
         {% for related in related_papers %}
-        <a href="{% url 'paper' related.id %}" style="text-decoration: none;" class="content">
-            <div class="paper_card">
-                <div class="paper_details">
-                    <div class="paper_title" value="{{ related_paper.title }}" search="{{ search }}">{{ related.title }}</div>
-                    <div class="subtitle_container">
-                        <div class="paper_views">{{ related.downloads }} views</div>
-                        <div class="paper_author">Author1, Author2, Author 3 {{ related.year }}</div>
-                    </div>
-                    <div class="paper_abstract" class="abstract" value="{{ related.abstract }}" search="{{ search }}">
-                        {{ related.abstract|slice:":240"}}...
-                    </div>  
-                 </div>
+        <a href="{% url 'paper' related.slug %}" class="content">
+            <div class="related_paper_card">
+                <div class="related_paper_views_year">{{ related.downloads}} Views &middot; {{ related.year}}</div>
+                <div class="related_paper_title" >{{ related.title }}</div>
+                <!-- <div class="related_paper_authors" >Cemiller, Carayap, Villanueva</div> -->
+                <div class="related_paper_abstract" >{{ related.abstract|slice:"100" }}...</div>
             </div>
         </a>
         {% endfor %}
-        <button id="load_more" class="btn btn_tertiary">Load More</button>
+        <div class="show_more">Show More</div>
     </div>
 </section>
 
@@ -136,11 +127,12 @@
 
     $(document).ready(function(){
         $(".content").slice(0, 2).show(); 
-        $("#load_more").on("click", function(e){
+        $(".show_more").on("click", function(e){
             e.preventDefault();
             $(".content:hidden").slice(0, 2).slideDown(); 
             if($(".content:hidden").length == 0) {
-                $("#load_more").text("No Content").addClass("noContent");
+                // $(".show_more").text("No Content").addClass("noContent");
+                $(".show_more").css('display', 'none');
             }
       });
     });

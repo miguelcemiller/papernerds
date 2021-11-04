@@ -86,7 +86,7 @@ def resultsView(request):
                 # Learn vocabulary and idf, return term-document matrix
                 X,v = create_tfidf_features(data)
                 features = v.get_feature_names_out()
-                print(features, len(features))
+                #print(features, len(features))
 
                 #run
                 user_question = [search]

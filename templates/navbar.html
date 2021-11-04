@@ -12,12 +12,17 @@
         <!-- nothing -->
         
         {% else %}
-        <form id="search_form" class="search_container" action="{% url 'results' %}" method="GET">
+        <form id="search_form" class="navbar_search search_container" action="{% url 'results' %}" method="GET">
             <input name="search" class="search_text" type="text" id="input" placeholder="Search...">
             <button class="search_btn">
                 <img src="{% static 'images/search.svg'%}" >
             </button>
         </form>
+        <div class="search_btn_alt_wrapper">
+            <button class="search_btn_alt">
+                <img src="{% static 'images/search_alt.svg'%}" >
+            </button>
+        </div>
         {% endif %}
 
     
@@ -27,7 +32,7 @@
                 <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
                 <div class="profile_name">{{ request.user.first_name }}</div>
             </div>
-            <ul class="hide">
+            <ul class="profile_dropdown hide_dropdown">
                 <li><a href="#">Profile</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             </ul>
@@ -53,11 +58,11 @@
 <script type="text/javascript">
     $('.profile_container').click(function(e) {
         e.stopPropagation();
-       $('.profile_nav > ul').toggleClass('hide');
+        $('.profile_dropdown').toggleClass('hide_dropdown');
     });
 
     $('body').on('click', function() { 
-        $('.profile_nav > ul').addClass('hide');
+       $('.profile_dropdown').addClass('hide_dropdown');
     });
 
 </script>
