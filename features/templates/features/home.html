@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<section class="grid_container">
+<section class="flex_container_home">
         <div class="cards">
             {% for paper in papers %}
             <a href="{% url 'paper' paper.slug %}" style="text-decoration: none;">
@@ -47,69 +47,66 @@
     </div>
     {% endif %}
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        
-        const highlight = (needle, haystack) =>
-            haystack.replace(
-                new RegExp(`(${needle.join('|')})`, 'gi'),
-                (str) => `<b>${str}</b>`
-            );
-    
-         // Paper title abstract highlight 
-    
-        $(".paper_abstract").each(function (index, element) {
-    
-            var abstract = $(element).attr('value');
-            var search = $(element).attr('search');
-    
-    
-            var searchArr = search.split(/\s/);
-    
-            $(element).html(highlight(searchArr, abstract)); 
-        }); 
-    
-        // Paper title search highlight 
-    
-        $(".paper_title").each(function (index, element) {
-    
-            var title = $(element).attr('value');
-            var search = $(element).attr('search');
-    
-    
-            var searchArr = search.split(/\s/);
-    
-            $(element).html(highlight(searchArr, title)); 
-        }); 
-    
-        
-        // Connect search form to pagination
-    
-        // Get search form and page links
-        var searchForm = document.getElementById('search_form');
-        var pageLinks = document.getElementsByClassName('page_link');
-    
-        // Ensure search form exists
-        if(searchForm) {
-            for (var x=0; pageLinks.length > x; x++) {
-                pageLinks[x].addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    var page = this.getAttribute('page-value');
-                    
-                    searchForm.innerHTML += `<input value=${page} name="page" hidden/>`;
-    
-                    searchForm.submit();
-    
-                });
-            }
-        }
-    
-    </script>
-
-
 </section>
+
+<script type="text/javascript">
+        
+    const highlight = (needle, haystack) =>
+        haystack.replace(
+            new RegExp(`(${needle.join('|')})`, 'gi'),
+            (str) => `<b>${str}</b>`
+        );
+
+     // Paper title abstract highlight 
+
+    $(".paper_abstract").each(function (index, element) {
+
+        var abstract = $(element).attr('value');
+        var search = $(element).attr('search');
+
+
+        var searchArr = search.split(/\s/);
+
+        $(element).html(highlight(searchArr, abstract)); 
+    }); 
+
+    // Paper title search highlight 
+
+    $(".paper_title").each(function (index, element) {
+
+        var title = $(element).attr('value');
+        var search = $(element).attr('search');
+
+
+        var searchArr = search.split(/\s/);
+
+        $(element).html(highlight(searchArr, title)); 
+    }); 
+
+    
+    // Connect search form to pagination
+
+    // Get search form and page links
+    var searchForm = document.getElementById('search_form');
+    var pageLinks = document.getElementsByClassName('page_link');
+
+    // Ensure search form exists
+    if(searchForm) {
+        for (var x=0; pageLinks.length > x; x++) {
+            pageLinks[x].addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                var page = this.getAttribute('page-value');
+                
+                searchForm.innerHTML += `<input value=${page} name="page" hidden/>`;
+
+                searchForm.submit();
+
+            });
+        }
+    }
+
+</script>
 
 
 {% endblock content %}
