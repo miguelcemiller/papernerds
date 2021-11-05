@@ -760,15 +760,13 @@ header {
 
 .paper_card {
     width: 100%;
-    height: 163px;
+    min-height: min-content;
+    max-height: max-content;
 
     background: var(--background);
-
-    border: 1.5px solid var(--line);
+    border: 1px solid var(--line);
     border-radius: 18px;
-
     padding: 17px 25px;
-    margin: 0 auto;
 
     cursor: pointer;
 }
@@ -778,8 +776,9 @@ header {
 }
 
 .paper_details {
-    height: 100%;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .paper_title {
@@ -788,11 +787,9 @@ header {
     color: var(--text-primary);
     line-height: 20px;
 }
-.subtitle_container > div{
-    display: inline-block;
-
+.subtitle_container {
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-secondary);
 }
 
@@ -801,9 +798,12 @@ header {
     font-weight: 400;
     color: var(--text-secondary);
     line-height: 20px;
+
+    padding-top: 3px;
 }
 
 /* End Paper Cards */
+
 
 /* Pagination */
 
@@ -1746,10 +1746,14 @@ footer a {
 
     .cards {
         gap: 0;
+        margin-top: 0;
     }
 
-    .cards a:not(:last-of-type) .paper_card{
+    .cards a:not(:last-of-type) .paper_card {
         border-bottom: 0;
+    }
+    .cards a:first-of-type .paper_card {
+        border-top: 0;
     }
 
     .paper_card, .paper_card_full {
@@ -1763,10 +1767,10 @@ footer a {
     }
 
     /* hide original sign in, show fake sign in */
-    .navbar > *:nth-child(4) {
+    .sign_in {
         display: none;
     }
-    .navbar > *:last-child {
+    .sign_in_m {
         display: block;
     }
 
