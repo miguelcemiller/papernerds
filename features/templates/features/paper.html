@@ -89,9 +89,9 @@
         </div>
     
         {% if request.user.is_authenticated %}
-        <a href="{% static 'images/papers/' %}{{paper.pdf_name}}.pdf" target="_blank"><button class="btn btn_secondary">View</button></a>
+        <a href="{% static 'images/papers/' %}{{paper.pdf_name}}.pdf" target="_blank"><button class="btn btn_primary">View</button></a>
         {% else %}
-        <a class="view"><button class="btn btn_secondary">View</button></a>
+        <a class="view"><button class="btn btn_primary">View</button></a>
         {% endif %}
     </div>
 

@@ -13,6 +13,34 @@
             </form>
         </div>
     </div>
+
+    <div class="login_modal_m_overlay">
+        <div id="slider" class="slide-out">
+            <div class="login_modal_m">
+                <div class="login_modal_m_header">
+                    <div class="login_modal_m_close">
+                        <img src="{% static 'images/close.svg' %}">
+                    </div>
+                    <div class="login_modal_m_header_text">Login</div>
+                </div>
+                
+                <div class="login_modal_m_main">
+                    <form class="login_modal_m_form" action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form_input" type="" name="username" placeholder="Username">
+                        <input class="form_input" type="password" name="password" placeholder="Password">
+                        <input class="btn form_btn" type="submit" value="Log in">
+                        <div class="form_forgot">Forgot your password?</div>
+                    </form>
+                </div>
+                
+                <div class="login_modal_m_footer">
+                    <div class="separator footer_separator"></div>
+                    <div class="login_modal_m_footer_text">Don't have an account? <span>Sign up</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
    
     <div class="navbar">
         <a href="{% url 'landing' %}">
@@ -52,13 +80,11 @@
         </div>
         
         {% else %}
-        <div class="cta_container">
-            <a href="{% url 'login' %}"><button class="btn btn_secondary">Sign In</button></a>
-            <div class="hamburger">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
+        <div class="sign_in">
+            <a href="{% url 'login' %}"><button class="btn btn_primary">Sign In</button></a>
+        </div>
+        <div class="sign_in_m hide_sign_in">
+            <a><button class="btn btn_primary">Sign In</button></a>
         </div>
         {% endif %}
     </div>  
@@ -82,8 +108,9 @@
 
     // Search Modal Overlay 
     $('.search_btn_alt_wrapper').click(function(e) {
-        $('.search_modal_overlay').css('display', 'flex');
+        $('.search_modal_overlay').css('display', 'flex'); // Display modal
         $('body').css('overflow-y', 'hidden'); // Disable vertical scroll on body
+        $('.search_modal_text').focus(); // Focus search modal text
     });
 
     $(".search_modal_back").on("click", function() {
@@ -99,6 +126,34 @@
      $(".search_modal").on("click", function(e) { // Disable click on search modal
          e.stopPropagation();
     });
+
+    // Login Modal Mobile Overlay 
+    $('.sign_in_m').click(function(e) {
+        $('.login_modal_m_overlay').css('display', 'flex'); // Display modal
+        $('body').css('overflow-y', 'hidden'); // Disable vertical scroll on body
+
+
+        $('#slider').removeClass('slide-out');
+        $('#slider').addClass('slide-in');
+    });
+
+    $(".login_modal_m_close").on("click", function() {
+        $('#slider').removeClass('slide-in');
+        $('#slider').addClass('slide-out');
+
+        // wait 0.5s for animation to finish
+        setTimeout(function() {
+            $(".login_modal_m_overlay").css("display", "none");
+             $('body').css('overflow-y', 'auto'); // Enable vertical scroll on body
+        }, 500);
+
+     
+
+    });
+
+
+
+
 
 
 </script>

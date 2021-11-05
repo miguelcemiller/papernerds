@@ -82,7 +82,7 @@
 }
 
 html {
-    height: -webkit-fill-available;
+    height: 100%;
 }
 
 body {
@@ -107,7 +107,7 @@ body {
 /* Navigation Bar */
 
 header {
-    border-bottom: 1.5px solid var(--line);
+    border-bottom: 1px solid var(--line);
 
 }
 
@@ -171,7 +171,7 @@ header {
 
 .search_text:focus {
     outline:none;
-    box-shadow: 0 0 0 1.5px var(--primary);
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 
@@ -204,6 +204,10 @@ header {
     cursor: pointer;
 
     transition: all 0.3s ease 0s;  
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search_btn_alt_wrapper {
@@ -228,12 +232,12 @@ header {
 }
 
 .search_btn img {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
 }
 .search_btn_alt img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
 }
 
 
@@ -245,7 +249,7 @@ header {
     background-color: var(--card-hover);
 }
 
-.cta_container {
+.sign_in, .sign_in_m {
     min-width: max-content;
 }
 
@@ -253,7 +257,7 @@ header {
     background-color: var(--primary);
     color: var(--background);
 
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -261,7 +265,7 @@ header {
     text-align: center;
     text-decoration: none;
     
-    padding: 5px 18px;
+    padding: 6px 15px;
 
     border: none;
     border-radius: 18px;
@@ -276,18 +280,19 @@ header {
 }
 
 
-.btn_secondary {
-    background-color: var(--background);
-    color: var(--primary);
-
-    box-shadow: inset 0 0 0 1.5px var(--primary);
-}
-
-.btn_secondary:hover {
+.btn_primary {
     background-color: var(--primary);
     color: var(--background);
 
-    box-shadow: none;
+    /* box-shadow: inset 0 0 0 2px var(--primary); */
+    /* box-shadow: inset 0 0 0 1px var(--primary); */
+    /* border: 2px solid var(--primary); */
+}
+
+.btn_primary:hover {
+    background-color: var(--btn-hover);
+
+    /* box-shadow: none; */
 }
 
 
@@ -866,7 +871,7 @@ header {
 
     background: var(--background);
 
-    border: 1.5px solid var(--line);
+    border: 1px solid var(--line);
     border-radius: 18px;
 
     padding: 20px 25px;
@@ -888,7 +893,7 @@ header {
     font-size: 20px;
     font-weight: 700;
     line-height: 23px;
-    letter-spacing: 0.1px;
+    letter-spacing: 0.2px;
 }
 
 .paper_details_full .paper_abstract {
@@ -1106,7 +1111,7 @@ br {
 
 .search_modal_text:focus {
     outline:none;
-    box-shadow: 0 0 0 1.5px var(--primary);
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 .search_modal_btn {
@@ -1126,6 +1131,10 @@ br {
     cursor: pointer;
 
     transition: all 0.3s ease 0s;  
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search_modal_btn:hover {
@@ -1133,11 +1142,152 @@ br {
 }
 
 .search_modal_btn img {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
 }
 
 /* End Search Modal Overlay */
+
+/* Login Modal Mobile Overlay */
+
+.hide_sign_in {
+    display: none;
+}
+
+@keyframes slide-in {
+    100% { transform: translateX(0%); }
+}
+
+@keyframes slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.5s forwards;
+    -webkit-animation: slide-out 0.5s forwards;
+}
+
+#slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+}
+
+.login_modal_m_overlay {
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: start;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 3;
+}
+
+.login_modal_m {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+
+    background-color: var(--background);
+}
+
+.login_modal_m_header {
+    display: flex;
+    align-items: center;
+
+    height: 60px;
+
+    padding: 0 var(--page-gutter);
+    padding-right: calc(var(--page-gutter) + 15px);
+    
+}
+
+.login_modal_m_close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease 0s;
+}
+
+.login_modal_m_close:hover {
+    background-color: var(--card-hover);
+}
+.login_modal_m_close > img {
+    width: 15px;
+}
+
+.login_modal_m_header_text {
+    flex: 1;
+    text-align: center;
+
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.login_modal_m_main {
+    overflow-y: auto;
+
+    padding: 0 var(--page-gutter);
+    padding-left: calc(var(--page-gutter) + 15px);
+    padding-right: calc(var(--page-gutter) + 15px);
+    padding-top: 2px;
+    padding-bottom: 30px;
+}
+
+.login_modal_m_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login_modal_m_footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    height: 60px;
+}
+
+.login_modal_m_footer_text {
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+
+    padding-left: calc(var(--page-gutter) + 15px);
+}
+
+.login_modal_m_footer_text > span {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* End Login Modal Mobile Overlay */
 
 
 /* Login Overlay */
@@ -1156,8 +1306,6 @@ br {
     height: 100%; /* Full height (cover the whole page) */
 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    /*z-index: 2;*/
-    /*cursor: pointer;*/ /* Add a pointer on hover */
 }
 
 .overlay_login {
@@ -1170,7 +1318,7 @@ br {
 
     background-color: var(--background);
     
-    border: 1.5px solid var(--line);
+    border: 1px solid var(--line);
     border-radius: 18px;
 
     padding: 15px 15px;
@@ -1255,7 +1403,7 @@ br {
 
 .form_input:focus {
     outline:none;
-    box-shadow: 0 0 0 1.5px var(--primary);
+    box-shadow: 0 0 0 2px var(--primary);
 }
 
 .form_btn {
@@ -1308,7 +1456,7 @@ footer {
     background-color: var(--background);
     width: 100%;
     margin-top: auto;
-    border-top: 1.5px solid var(--line); 
+    border-top: 1px solid var(--line); 
 }
 .footer {
     display: flex;
@@ -1454,6 +1602,14 @@ footer a {
 
     .related_papers, .related_papers a:last-of-type .related_paper_card, .show_more:hover {
         border-radius: 0;
+    }
+
+    /* hide original sign in, show fake sign in */
+    .navbar > *:nth-child(4) {
+        display: none;
+    }
+    .navbar > *:last-child {
+        display: block;
     }
     
 }
