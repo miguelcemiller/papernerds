@@ -356,7 +356,13 @@ header {
     cursor: pointer;
 }
 
-.profile_container:hover {
+.profile_container_m {
+    padding: 5px 5px 5px 5px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.profile_container:hover, .profile_container_m:hover {
     background-color: var(--card-hover);
 }
 
@@ -364,6 +370,7 @@ header {
     border-radius: 50%;
     width: 30px;
     height: 30px;
+    display: block;
 }
 
 .profile_name {
@@ -1290,6 +1297,164 @@ br {
 /* End Login Modal Mobile Overlay */
 
 
+/* Account Modal Mobile Overlay */
+
+.hide_profile_container {
+    display: none;
+}
+
+@keyframes a-m-slide-in {
+    100% { transform: translateX(0%); }
+}
+
+@keyframes a-m-slide-out {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(100%); }
+}
+
+.a-m-slide-in {
+    animation: a-m-slide-in 0.5s forwards;
+    -webkit-animation: a-m-slide-in 0.5s forwards;
+}
+
+.a-m-slide-out {
+    animation: a-m-slide-out 0.5s forwards;
+    -webkit-animation: a-m-slide-out 0.5s forwards;
+}
+
+#a_m_slider {
+    justify-self: end;
+    
+    position: absolute;
+    width: 60%;
+    height: 100%;
+
+    transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+}
+
+
+.account_modal_m_overlay {
+    display: none; /* Hidden by default */
+    justify-content: end;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 3;
+}
+
+.account_modal_m {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--background);
+}
+
+.account_modal_m_header {
+    display: flex;
+    align-items: center;
+
+    height: 60px;
+
+    padding: 0 var(--page-gutter);
+    padding-right: calc(var(--page-gutter) + 15px);
+    
+}
+
+.account_modal_m_close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease 0s;
+}
+
+.account_modal_m_close:hover {
+    background-color: var(--card-hover);
+}
+.account_modal_m_close > img {
+    width: 15px;
+}
+
+.account_modal_m_header_text {
+    flex: 1;
+    text-align: center;
+
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.account_modal_m_main {
+    display: flex;
+    flex-direction: column;
+}
+
+.account_modal_m_picture_name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0 var(--page-gutter);
+    padding-left: calc(var(--page-gutter) + 15px);
+    padding-right: calc(var(--page-gutter) + 15px);
+}
+.account_modal_m_picture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.account_modal_m_name {
+    font-weight: 600;
+    font-size: 16px;
+
+    color: var(--text-primary);
+}
+
+.account_modal_m_separator {
+    width: 100%;
+
+    margin-bottom: 5px;
+}
+
+.account_modal_m_menu {
+    padding: 10px var(--page-gutter);
+    padding-left: calc(var(--page-gutter) + 15px);
+    padding-right: calc(var(--page-gutter) + 15px);
+
+    cursor: pointer;
+}
+
+.account_modal_m_menu:hover {
+    background-color: var(--card-hover);
+}
+
+.account_modal_m_main > a {
+    text-decoration: none;
+}
+.account_modal_m_menu {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* End Account Modal Mobile Overlay */
+
+
 /* Login Overlay */
 
 .overlay {
@@ -1561,15 +1726,10 @@ footer a {
   }
 
 
-/* Drop name, profile_container padding right to 5px, search icon only*/
-@media screen and (max-width: 600px) {
-    .profile_name {
-        display: none;
-    }
-    .profile_container {
-        padding-right: 5px;
-    }
 
+@media screen and (max-width: 600px) {
+
+    /*  search icon only*/
     .navbar_search {
         display: none;
     }
@@ -1578,8 +1738,6 @@ footer a {
         display: inline-block;
     }
 
-
-  
 
     /* Paper Cards, Paper Card Full, and Related Papers */
     .flex_container_home, .flex_container_paper {
@@ -1609,6 +1767,14 @@ footer a {
         display: none;
     }
     .navbar > *:last-child {
+        display: block;
+    }
+
+    /* hide original profile container, show fake profile container */
+    .profile_container {
+        display: none;
+    }
+    .profile_container_m {
         display: block;
     }
     

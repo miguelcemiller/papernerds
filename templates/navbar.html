@@ -41,6 +41,29 @@
             </div>
         </div>
     </div>
+
+    <div class="account_modal_m_overlay">
+        <div id="a_m_slider" class="a-m-slide-out">
+            <div class="account_modal_m">
+                <div class="account_modal_m_header">
+                    <div class="account_modal_m_close">
+                        <img src="{% static 'images/close.svg' %}">
+                    </div>
+                    <div class="account_modal_m_header_text">Account</div>
+                </div>
+
+                <div class="account_modal_m_main">
+                    <div class="account_modal_m_picture_name">
+                        <img class="account_modal_m_picture" src="{% static 'images/profiles/headshot.png'%}" >
+                        <div class="account_modal_m_name">{{ request.user.first_name }}</div>
+                    </div>
+                    <div class="separator account_modal_m_separator"></div>
+                    <a href="#"><div class="account_modal_m_menu">Profile</div></a>
+                    <a href="{% url 'logout' %}"><div class="account_modal_m_menu">Logout</div></a>
+                </div>
+            </div>
+        </div>
+    </div>
    
     <div class="navbar">
         <a href="{% url 'landing' %}">
@@ -72,6 +95,9 @@
             <div class="profile_container">
                 <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
                 <div class="profile_name">{{ request.user.first_name }}</div>
+            </div>
+            <div class="profile_container_m hide_profile_container">
+                <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
             </div>
             <ul class="profile_dropdown hide_dropdown">
                 <li><a href="#">Profile</a></li>
@@ -127,6 +153,8 @@
          e.stopPropagation();
     });
 
+
+
     // Login Modal Mobile Overlay 
     $('.sign_in_m').click(function(e) {
         $('.login_modal_m_overlay').css('display', 'flex'); // Display modal
@@ -146,11 +174,44 @@
             $(".login_modal_m_overlay").css("display", "none");
              $('body').css('overflow-y', 'auto'); // Enable vertical scroll on body
         }, 500);
-
-     
-
     });
 
+
+
+    // Account Modal Mobile Overlay 
+    $('.profile_container_m').click(function(e) {
+        $('.account_modal_m_overlay').css('display', 'flex'); // Display modal
+        $('body').css('overflow-y', 'hidden'); // Disable vertical scroll on body
+
+        $('#a_m_slider').removeClass('a-m-slide-out');
+        $('#a_m_slider').addClass('a-m-slide-in');
+    });
+
+    $(".account_modal_m_close").on("click", function() {
+        $('#a_m_slider').removeClass('a-m-slide-in');
+        $('#a_m_slider').addClass('a-m-slide-out');
+
+         // wait 0.5s for animation to finish
+        setTimeout(function() {
+            $(".account_modal_m_overlay").css("display", "none");
+             $('body').css('overflow-y', 'auto'); // Enable vertical scroll on body
+        }, 500);
+    });
+    
+    $(".account_modal_m_overlay").on("click", function() { // When overlay (dark) is click
+        $('#a_m_slider').removeClass('a-m-slide-in');
+        $('#a_m_slider').addClass('a-m-slide-out');
+
+         // wait 0.5s for animation to finish
+        setTimeout(function() {
+            $(".account_modal_m_overlay").css("display", "none");
+             $('body').css('overflow-y', 'auto'); // Enable vertical scroll on body
+        }, 500);
+    });
+
+     $(".account_modal_m").on("click", function(e) { // Disable click on search modal
+         e.stopPropagation();
+    });
 
 
 
