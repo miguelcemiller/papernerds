@@ -1,12 +1,12 @@
 {% extends 'main.html' %}
-
+{% load static %}
 
 {% block content %}
 
 <section class="flex_container_home">
-        <div class="cards">
+        <div class="cards infinite-container">
             {% for paper in papers %}
-            <a href="{% url 'paper' paper.slug %}" style="text-decoration: none;">
+            <a class="infinite-item" href="{% url 'paper' paper.slug %}" style="text-decoration: none;">
                 <div class="paper_card">
                     <div class="paper_details">
                         <div class="paper_title" value="{{ paper.title }}" search="{{ search }}">{{ paper.title }}</div>
@@ -18,33 +18,18 @@
             {% endfor %}
         </div>
     
+        <div class="loader"></div>
+        {% if papers.has_next %}
+        <a class="infinite-more-link" href="?page={{ papers.next_page_number }}" page-value="{{papers.next_page_number}}"></a>
+        {% endif %}
+  
 
-    {% if papers.has_other_pages %}
-    <div class="pagination">
-        <ul class="pagination_nav">
-
-            {% if papers.has_previous %}
-            <li><a href="?page={{papers.previous_page_number}}" class="page_link" page-value="{{papers.previous_page_number}}">&#10094;</a></li>
-            {% endif %}
-
-            {% for page in custom_range %}
-            {% if page == papers.number %}
-            <li><a href="?page={{page}}" class="active page_link" page-value="{{page}}">{{page}}</a></li>
-            {% else %}
-            <li><a href="?page={{page}}" class="page_link" page-value="{{page}}">{{page}}</a></li>
-            {% endif %}
-            {% endfor %}
-
-            {% if papers.has_next %}
-            <li><a href="?page={{papers.next_page_number}}" class="page_link" page-value="{{papers.next_page_number}}">&#10095;</a></li>
-            {% endif %}
-        </ul>
-    </div>
-    {% endif %}
 
 </section>
 
-<script type="text/javascript">
+
+
+<script>
         
     const highlight = (needle, haystack) =>
         haystack.replace(
@@ -52,8 +37,7 @@
             (str) => `<b>${str}</b>`
         );
 
-     // Paper title abstract highlight 
-
+     // Paper title abstract highlight
     $(".paper_abstract").each(function (index, element) {
 
         var abstract = $(element).attr('value');
@@ -65,8 +49,7 @@
         $(element).html(highlight(searchArr, abstract)); 
     }); 
 
-    // Paper title search highlight 
-
+    // Paper title search highlight
     $(".paper_title").each(function (index, element) {
 
         var title = $(element).attr('value');
@@ -78,9 +61,8 @@
         $(element).html(highlight(searchArr, title)); 
     }); 
 
-    
+   /*  
     // Connect search form to pagination
-
     // Get search form and page links
     var searchForm = document.getElementById('search_form');
     var pageLinks = document.getElementsByClassName('page_link');
@@ -99,9 +81,32 @@
 
             });
         }
-    }
+    }  */
+</script>
+
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>
+
+<script>
+    var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+
+        // offset: 'bottom-in-view',
+        offset: function() {
+            return this.context.innerHeight() - this.adapter.outerHeight() - 50
+        },
+
+        onBeforePageLoad: function() {
+            $('.loader').show();
+        },
+
+        onAfterPageLoad: function() {
+            $('.loader').hide();
+        }
+    })
 
 </script>
+
 
 
 {% endblock content %}
