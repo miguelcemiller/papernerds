@@ -4,6 +4,7 @@
 {% block content %}
 
 <section class="flex_container_home">
+    {% if '/home' in request.path %}
     <div class="cards-loader-wrapper">
         <div class="cards infinite-container">
             {% for paper in papers %}
@@ -18,47 +19,103 @@
             </a>
             {% endfor %}
         </div>
-    
+
         <div class="loader hide"></div>
         {% if papers.has_next %}
         <a class="infinite-more-link" href="?page={{ papers.next_page_number }}" page-value="{{papers.next_page_number}}"></a>
         {% endif %}
-        </div>
-        
+    </div>
 
-        {% if request.user.is_authenticated %}
-        <div class="student-sidebar">
-            <div class="student-sidebar__heading">Pre-Proposal <span>&middot; 1/4</span></div>
-            <a class="student-sidebar__card" href="#">
-                <div class="student-sidebar__card__content">
-                    <div>General Orientation</div>
-                    <div>Watch and understand the orientation.</div>
-                </div>
-                <div class="student-sidebar__card__progress">
-                    <img src="{% static 'images/checked_alt.svg' %}" alt="">
+    {% if request.user.is_authenticated %}
+    <div class="student-sidebar">
+        <div class="student-sidebar__heading">Pre-Proposal <span>&middot; 1/4</span></div>
+        {% for portal in portals %}
+        <a class="student-sidebar__card" href="{% url 'portal' portal.slug %}">
+            <div class="student-sidebar__card__content">
+                <div>{{portal.step}}</div>
+                <div>{{portal.description}}</div>
+            </div>
+            <div class="student-sidebar__card__progress">
+                {% if portal.completed == True %}
+                <img src="{% static 'images/checked_alt.svg' %}" alt="">
+                {% else %}
+                <img src="{% static 'images/checked.svg' %}" alt="">
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endif %}
+
+    {% if '/results' in request.path %}
+    <div class="cards-loader-wrapper">
+        <div class="cards infinite-container">
+            {% for paper in papers %}
+            <a class="infinite-item" href="{% url 'paper' paper.slug %}" style="text-decoration: none;">
+                <div class="paper_card">
+                    <div class="paper_details">
+                        <div class="paper_title" value="{{ paper.title }}" search="{{ search }}">{{ paper.title }}</div>
+                        <div class="subtitle_container">{{ paper.downloads }} views &middot; {{ paper.year }} &middot; Cemiller, M., Carayap, J., Villanueva, A. </div>
+                        <div class="paper_abstract" class="abstract" value="{{ paper.abstract|slice:250 }}..." search="{{ search }}"> {{ paper.abstract|slice:250 }}...</div>  
+                    </div>
                 </div>
             </a>
-            <a class="student-sidebar__card" href="#">
-                <div class="student-sidebar__card__content">
-                    <div>Group Selection</div>
-                    <div>Select your own thesis group members!</div>
-                </div>
-                <div class="student-sidebar__card__progress">
-                    <img src="{% static 'images/checked_alt.svg' %}" alt="">
-                </div>
-            </a>
-            <a class="student-sidebar__card" href="#">
-                <div class="student-sidebar__card__content">
-                    <div>Topic Formulation</div>
-                    <div>Start formulating your research topic!</div>
-                </div>
-                <div class="student-sidebar__card__progress">
-                    <img src="{% static 'images/checked_alt.svg' %}" alt="">
-                </div>
-            </a>
+            {% endfor %}
         </div>
+
+        <div class="loader hide"></div>
+        {% if papers.has_next %}
+        <a class="infinite-more-link" href="?page={{ papers.next_page_number }}" page-value="{{papers.next_page_number}}"></a>
         {% endif %}
+    </div>
+    {% endif %}
 
+
+    {% if '/portal' in request.path and request.user.is_authenticated %}
+    <div class="portal-details--research-orientation">
+        <div class="portal-details__heading">
+            <div class="portal-details__heading__step">{{current_portal.step}}</div>
+            {% if current_portal.completed == True %}
+            <img src="{% static 'images/checked_alt.svg' %}" alt="">
+            {% else %}
+            <img src="{% static 'images/checked.svg' %}" alt="">
+            {% endif %}
+            <div class="portal-details__heading__stage">{{current_portal.stage}}</div>
+        </div> 
+
+        <p>Details</p>
+        <div class="portal-details__details">Your subject instructor will thoroughly orient and discuss the nature of activities for the Pre-Proposal stage. Make sure you understand it fully before moving on to the next step.</div>
+
+        <div class="separator"></div>
+
+        <p>Confimation</p>
+        <div class="portal-details__confirmation">Have you understood the Research Orientation contents?</div>
+
+        <button class="btn">Confirm</button>
+    </div>
+
+    <div class="student-sidebar">
+        <div class="student-sidebar__heading">Pre-Proposal <span>&middot; 1/4</span></div>
+        {% for portal in portals %}
+        <a class="student-sidebar__card" href="{% url 'portal' portal.slug %}">
+            <div class="student-sidebar__card__content">
+                <div>{{portal.step}}</div>
+                <div>{{portal.description}}</div>
+            </div>
+            <div class="student-sidebar__card__progress">
+                {% if portal.completed == True %}
+                <img src="{% static 'images/checked_alt.svg' %}" alt="">
+                {% else %}
+                <img src="{% static 'images/checked.svg' %}" alt="">
+                {% endif %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    
 </section>
 
 

@@ -45,16 +45,17 @@ class Paper(models.Model):
 
 
 STAGES = (
-    ('pre_proposal', 'PRE-PROPOSAL'),
-    ('proposal', 'PROPOSAL'),
-    ('colloquium', 'COLLOQUIUM'),
-    ('final_oral', 'FINAL-ORAL'),
+    ('Pre-Proposal', 'PRE-PROPOSAL'),
+    ('Proposal', 'PROPOSAL'),
+    ('Research Colloquium', 'COLLOQUIUM'),
+    ('Final Oral Defense', 'FINAL-ORAL'),
 )
 
 class Portal(models.Model):
     step = models.CharField(max_length=100, blank=True, null=True)
     description = models.CharField(max_length=200, blank=True, null=True)
-    stage = models.CharField(max_length=20, choices=STAGES)
+    stage = models.CharField(max_length=20, choices=STAGES, blank=False, null=False)
+    completed = models.BooleanField(default=False)
    
     slug = models.SlugField(max_length=500, unique=True, null=True, blank=True)
 

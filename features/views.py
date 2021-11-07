@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 
 from django.contrib.auth.models import User
 from . models import Paper
+from . models import Portal
 
 from . tf_idf import preprocess, create_tfidf_features, calculate_similarity, show_similar_documents
 import time
@@ -135,9 +136,12 @@ def home_view(request):
     # no search
     papers = Paper.objects.all()
 
+    # portals
+    portals = Portal.objects.all()
+
     custom_range, papers = paginate_papers(request, papers, 4)
 
-    context = {'papers': papers, 'search': search, 'custom_range': custom_range}
+    context = {'papers': papers, 'search': search, 'custom_range': custom_range, 'portals': portals}
     return render(request, 'features/home.html', context)
 
 
@@ -179,3 +183,10 @@ def paper_view(request, slug):
 
     context = {'paper': paper, 'related_papers': related_papers}
     return render(request, 'features/paper.html', context)
+
+def portal_view(request, slug):
+    current_portal = Portal.objects.get(slug=slug)
+    portals = Portal.objects.all()
+
+    context = {'current_portal': current_portal, 'portals': portals}
+    return render(request, 'features/home.html', context)

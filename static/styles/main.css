@@ -801,6 +801,75 @@ nav {
     100% { transform: rotate(360deg); }
 }
 
+/* ------------------PORTAL DETAILS------------------ */ 
+
+.portal-details--research-orientation {
+    width: 100%;
+    max-width: 694px;
+    min-width: 200px;
+
+    height: max-content;
+
+    background: var(--background);
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+
+    padding: 17px 24px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.portal-details__heading {
+    display: flex;
+    align-items: center;
+}
+
+.portal-details__heading__step {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--text-primary);
+}
+
+.portal-details__heading > img {
+    width: 15px;
+    height: 15px;
+
+    margin-left: 15px;
+}
+
+.portal-details__heading__stage {
+    flex: 1;
+    text-align: end;
+
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.portal-details--research-orientation > p {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-secondary);
+
+    padding-top: 20px;
+}
+
+.portal-details__details, .portal-details__confirmation {
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--text-secondary);
+    padding-top: 3px;
+
+    line-height: 19px;
+    letter-spacing: 0.1px;
+}
+
+.portal-details--research-orientation > button {
+    width: 100%;
+    margin-top: 20px;
+}
+
 
 /* ------------------STUDENT SIDEBAR------------------ */ 
 
