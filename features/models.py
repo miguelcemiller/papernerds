@@ -44,16 +44,44 @@ class Paper(models.Model):
 
 
 
+STAGES = (
+    ('pre_proposal', 'PRE-PROPOSAL'),
+    ('proposal', 'PROPOSAL'),
+    ('colloquium', 'COLLOQUIUM'),
+    ('final_oral', 'FINAL-ORAL'),
+)
+
+class Portal(models.Model):
+    step = models.CharField(max_length=100, blank=True, null=True)
+    description = models.CharField(max_length=200, blank=True, null=True)
+    stage = models.CharField(max_length=20, choices=STAGES)
+   
+    slug = models.SlugField(max_length=500, unique=True, null=True, blank=True)
+
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self): 
+        return str(self.step) 
+
+
+
+
 # Functions
 
+# Random string generator
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-def unique_slug_generator(instance, new_slug=None):
+# Unique slug generator
+def unique_slug_generator(sender, instance, new_slug=None):
     if new_slug is not None:
         slug = new_slug
     else:
-        slug = slugify(instance.title)
+        if sender == Paper:
+            slug = slugify(instance.title)
+        elif sender == Portal:
+            slug = slugify(instance.step)
 
     class_ = instance.__class__
     qs_exists = class_.objects.filter(slug=slug).exists()
@@ -66,4 +94,11 @@ def unique_slug_generator(instance, new_slug=None):
 @receiver(pre_save, sender=Paper)
 def post_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = unique_slug_generator(instance)
+        instance.slug = unique_slug_generator(Paper, instance)
+
+@receiver(pre_save, sender=Portal)
+def post_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(Portal, instance)
+
+

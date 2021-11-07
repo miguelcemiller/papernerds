@@ -876,7 +876,7 @@ nav {
     display: flex;
     flex-direction: column;
 
-    padding-left: 10px;
+    padding-left: 15px;
     margin-right: 24px;
     align-self: center;
 }
