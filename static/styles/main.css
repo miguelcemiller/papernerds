@@ -140,14 +140,15 @@ nav {
 }
 
 .logo > img:first-child {
-    height: 17px;
+    height: 15px;
 }
 
 .logo > img:last-child {
-    height: 23px;
+    height: 21px;
 
     margin-right: var(--nav-gap);
 }
+
 
 /* ------------------SEARCH BAR------------------ */ 
 .search-form {
@@ -695,17 +696,25 @@ nav {
 
 
 
-/* Home */
+/* ------------------HOME------------------ */ 
 
 .flex_container_home {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
     
     padding: 0 var(--page-gutter);
 }
 
-/* Paper Cards */
+.cards-loader-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ------------------PAPER CARDS------------------ */ 
 
 .cards {
     display: flex;
@@ -765,9 +774,8 @@ nav {
     padding-top: 3px;
 }
 
-/* End Paper Cards */
 
-/* Loader Spinner */ 
+/* ------------------LOADER SPINNER------------------ */ 
 
 .loader {
     border: 4px solid hsl(263, 69%, 95%);
@@ -775,6 +783,9 @@ nav {
     border-top: 4px solid #8B55E0;
     width: 20px;
     height: 20px;
+
+    margin-bottom: 30px;
+
     -webkit-animation: spin 0.8s linear infinite; /* Safari */
     animation: spin 0.8s linear infinite;
 }
@@ -790,7 +801,94 @@ nav {
     100% { transform: rotate(360deg); }
 }
 
-/* End Loader Spinner */
+
+/* ------------------STUDENT SIDEBAR------------------ */ 
+
+.student-sidebar {
+    background-color: var(--background);
+
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    height: min-content;
+
+    width: 300px;
+
+    padding-bottom: 17px;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    position: sticky;
+    top: 91px;
+}
+
+.student-sidebar__heading {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text-primary);
+
+    padding-top: 17px;
+    padding-left: 24px;
+    padding-bottom: 10px;
+}
+
+.student-sidebar__heading > span {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.student-sidebar__card {
+    display: flex;
+    text-decoration: none;
+}
+
+.student-sidebar__card:hover {
+    background-color: var(--card-hover);
+}
+
+.student-sidebar__card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 10px 0px 10px 24px;
+
+    cursor: pointer;
+}
+
+
+.student-sidebar__card__content > div:first-child {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 16px;
+}
+
+.student-sidebar__card__content > div:last-child {
+    font-weight: 400;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 15px;
+}
+
+.student-sidebar__card__progress {
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 10px;
+    margin-right: 24px;
+    align-self: center;
+}
+
+.student-sidebar__card__progress > img {
+    width: 14px;
+    height: 14px;
+}
+
+
+
+
 
 
 /* Pagination */
@@ -863,6 +961,8 @@ nav {
     width: 100%;
     max-width: 694px;
     min-width: 200px;
+
+    height: max-content;
 
     background: var(--background);
 
@@ -960,7 +1060,6 @@ br {
     padding-top: 17px;
     padding-left: 24px;
     padding-bottom: 10px;
-
 }
 
 .related_papers a {
@@ -1041,7 +1140,7 @@ br {
     height: 100%; /* Full height (cover the whole page) */
 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 3;
+    z-index: 101;
 }
 
 /* Search modal */
@@ -1116,7 +1215,7 @@ br {
     height: 100%; /* Full height (cover the whole page) */
 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 3;
+    z-index: 101;
 }
 
 .login_modal_m {
@@ -1261,7 +1360,7 @@ br {
     height: 100%; /* Full height (cover the whole page) */
 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
-    z-index: 3;
+    z-index: 101;
 }
 
 .account_modal_m {
@@ -1384,6 +1483,7 @@ br {
     height: 100%; /* Full height (cover the whole page) */
 
     background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 101;
 }
 
 .overlay_login {
@@ -1524,6 +1624,9 @@ br {
 /* End Login Overlay */
 
 /* End Paper.html */
+
+
+/* ------------------FOOTER------------------ */ 
 
 
 

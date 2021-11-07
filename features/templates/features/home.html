@@ -4,6 +4,7 @@
 {% block content %}
 
 <section class="flex_container_home">
+    <div class="cards-loader-wrapper">
         <div class="cards infinite-container">
             {% for paper in papers %}
             <a class="infinite-item" href="{% url 'paper' paper.slug %}" style="text-decoration: none;">
@@ -18,12 +19,45 @@
             {% endfor %}
         </div>
     
-        <div class="loader"></div>
+        <div class="loader hide"></div>
         {% if papers.has_next %}
         <a class="infinite-more-link" href="?page={{ papers.next_page_number }}" page-value="{{papers.next_page_number}}"></a>
         {% endif %}
-  
+        </div>
+        
 
+        {% if request.user.is_authenticated %}
+        <div class="student-sidebar">
+            <div class="student-sidebar__heading">Pre-Proposal <span>&middot; 1/4</span></div>
+            <a class="student-sidebar__card" href="#">
+                <div class="student-sidebar__card__content">
+                    <div>General Orientation</div>
+                    <div>Watch and understand the orientation.</div>
+                </div>
+                <div class="student-sidebar__card__progress">
+                    <img src="{% static 'images/checked_alt.svg' %}" alt="">
+                </div>
+            </a>
+            <a class="student-sidebar__card" href="#">
+                <div class="student-sidebar__card__content">
+                    <div>Group Selection</div>
+                    <div>Select your own thesis group members!</div>
+                </div>
+                <div class="student-sidebar__card__progress">
+                    <img src="{% static 'images/checked_alt.svg' %}" alt="">
+                </div>
+            </a>
+            <a class="student-sidebar__card" href="#">
+                <div class="student-sidebar__card__content">
+                    <div>Topic Formulation</div>
+                    <div>Start formulating your research topic!</div>
+                </div>
+                <div class="student-sidebar__card__progress">
+                    <img src="{% static 'images/checked_alt.svg' %}" alt="">
+                </div>
+            </a>
+        </div>
+        {% endif %}
 
 </section>
 

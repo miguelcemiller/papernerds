@@ -9,6 +9,8 @@ urlpatterns = [
     path('home/', RedirectView.as_view(pattern_name = 'home')),
     path('paper/<slug:slug>', views.paper_view, name="paper"),
     path('paper/<slug:slug>/', RedirectView.as_view(pattern_name = 'paper')),
+    #path('portal/<slug:slug>', views.portal_view, name="portal"),
+
 
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
