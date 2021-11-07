@@ -16,11 +16,11 @@ from . utils import filter__in_preserve, paginate_papers, topic_distrib, paginat
 
 # Create your views here.
 
-def landingView(request):
+def landing_view(request):
     return render(request, 'features/landing.html')
 
 
-def loginView(request):
+def login_view(request):
     if request.method == 'POST':
         username= request.POST['username']
         password = request.POST['password']
@@ -54,12 +54,12 @@ def loginView(request):
     return render(request, 'features/login.html')
     
 
-def logoutView(request):
+def logout_view(request):
     logout(request)
     return redirect('landing')
 
 
-def resultsView(request):
+def results_view(request):
     search = ""
 
     if request.method == 'GET' and 'search' in request.GET:
@@ -129,7 +129,7 @@ def resultsView(request):
     return render(request, 'features/home.html', context)
 
 
-def homeView(request):
+def home_view(request):
     search = ""
 
     # no search
@@ -141,7 +141,7 @@ def homeView(request):
     return render(request, 'features/home.html', context)
 
 
-def paperView(request, slug):
+def paper_view(request, slug):
     paper = Paper.objects.get(slug=slug)
 
     # current paper title, abstract
