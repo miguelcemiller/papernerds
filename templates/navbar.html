@@ -91,15 +91,14 @@
    
         {% endif %}
 
-    
         {% if request.user.is_authenticated %}
         <div class="profile_nav">
             <div class="profile_container">
-                <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
-                <div class="profile_name">{{ request.user.first_name }}</div>
+                <img class="profile_image" src="{{ curr_student.profile_image.url }}" alt="">
+                <div class="profile_name">{{ curr_student.firstname }}</div>
             </div>
             <div class="profile_container_m hide_profile_container">
-                <img class="profile_image" src="{% static 'images/profiles/headshot.png'%}" alt="">
+                <img class="profile_image" src="{{ curr_student.profile_image.url }}" alt="">
             </div>
             <ul class="profile_dropdown hide_dropdown">
                 <li><a href="#">Profile</a></li>

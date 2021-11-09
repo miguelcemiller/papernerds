@@ -870,6 +870,87 @@ nav {
     margin-top: 20px;
 }
 
+/* ---------TEXT INPUT-------------- */
+.text-select {
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+
+    appearance: none;
+    
+    background-color: var(--text-field);
+
+    height: 40px;
+    width: 100%;
+    min-width: 100px;
+
+    border: 0px;
+
+    box-shadow: 0 0 0 1px var(--background); 
+    border-radius: 20px;
+
+    padding: 0 20px;
+
+    margin-top: 15px;
+
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.text-select:hover {
+    box-shadow: 0 0 0 1px var(--line);
+}
+
+.text-select:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--line);
+
+    background-color: var(--background);
+}
+
+option[value=""][disabled] {
+    display: none;
+    color: red;
+}
+
+.portal-details__deliverable {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    position: relative;
+
+    padding-top: 10px;
+}
+
+.portal-details__deliverable__name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+
+    padding-left: 10px;
+}
+
+.portal-details__deliverable__links {
+    position: absolute;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.portal-details__deliverable__links > a {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+
 
 /* ------------------STUDENT SIDEBAR------------------ */ 
 
@@ -1691,6 +1772,25 @@ br {
 }
 
 /* End Login Overlay */
+
+/* Register Overlay */
+
+.overlay--register {
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 101;
+}
 
 /* End Paper.html */
 

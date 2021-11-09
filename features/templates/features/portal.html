@@ -16,7 +16,9 @@
             {% endif %}
             <div class="portal-details__heading__stage">{{current_portal.stage}}</div>
         </div> 
-    
+
+
+        {% if current_portal.step == 'General Orientation'%}
         <p>Details</p>
         <div class="portal-details__details">Your subject instructor will thoroughly orient and discuss the nature of activities for the Pre-Proposal stage. Make sure you understand it fully before moving on to the next step.</div>
     
@@ -26,6 +28,61 @@
         <div class="portal-details__confirmation">Have you understood the Research Orientation contents?</div>
     
         <button class="btn">Confirm</button>
+        {% endif %}
+
+        {% if current_portal.step == 'Group Selection'%}
+        <p>Details</p>
+        <div class="portal-details__details">Now probably the most important part which is selecting your groupmates. You have the freedom to choose whoever you want. You can do everything on your own, or you can choose up to 3 members depending on the complexity of the project.</div>
+
+        <div class="separator"></div>
+
+        <p>Group</p>
+        <div class="portal-details__details">To start, Papernerds has provided an initial recommendation of members which best suits you based on skills.</div>
+
+        <select class="text-select">
+            <!--<option value="" disabled selected>Select your option</option>-->
+            <option value="starter" selected>Jian Carlo C. Carayap</option>
+            <option value="professional">Airha M. Villanueva</option>
+            <option value="corporate">Corporate</option>
+        </select>
+        <select class="text-select">
+            <!--<option value="" disabled selected>Select your option</option>-->
+            <option value="starter">Jian Carlo C. Carayap</option>
+            <option value="professional" selected>Airha M. Villanueva</option>
+            <option value="corporate">Corporate</option>
+        </select>
+        <select class="text-select">
+            <!--<option value="" disabled selected>Select your option</option>-->
+            <option value="starter">Jian Carlo C. Carayap</option>
+            <option value="professional">Airha M. Villanueva</option>
+            <option value="corporate" selected>Select an option</option>
+        </select>
+
+        <div class="separator"></div>
+        <p>Deliverables</p>
+        <div class="portal-details__details">Download the following, fill up, and upload here.</div>
+
+        <div class="portal-details__deliverable">
+            <img src="{% static 'images/clip.svg' %}">
+            <div class="portal-details__deliverable__name">Form 2- Topic Proposal Statement</div>
+            <div class="portal-details__deliverable__links">
+                <a href="#">Download</a>
+                <a href="#">Upload</a>
+            </div>
+        </div>
+        <div class="portal-details__deliverable">
+            <img src="{% static 'images/clip.svg' %}">
+            <div class="portal-details__deliverable__name">Form 3- Pre-Proposal Defense Rating Sheet</div>
+            <div class="portal-details__deliverable__links">
+                <a href="#">Download</a>
+                <a href="#">Upload</a>
+            </div>
+        </div>
+
+        <button class="btn">Confirm</button>
+        {% endif %}
+
+        
     </div>
     
     <div class="student-sidebar">

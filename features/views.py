@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 from django.contrib.auth.models import User
 from . models import Paper
 from . models import Portal
+from . models import Student
 
 from . tf_idf import preprocess, create_tfidf_features, calculate_similarity, show_similar_documents
 import time
@@ -50,9 +51,10 @@ def login_view(request):
             print('Username or password is incorrect')
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
            
-    #return render(request, 'papers/paper.html', context_instance=RequestContext(request))
-    #return redirect(request.path)
     return render(request, 'features/login.html')
+
+def register_view(request):
+    pass
     
 
 def logout_view(request):
@@ -126,7 +128,17 @@ def results_view(request):
         papers = Paper.objects.all()
         custom_range, papers = paginate_papers(request, papers, 4)
 
-    context = {'papers': papers, 'search': search, 'custom_range': custom_range}
+    # Get current student user
+    is_user_an = request.user.is_anonymous
+
+    if is_user_an == False: 
+        print("False")
+        curr_user = request.user
+        curr_student = Student.objects.get(user=curr_user)
+
+    curr_student = []
+
+    context = {'papers': papers, 'search': search, 'custom_range': custom_range, 'curr_student': curr_student}
     return render(request, 'features/home.html', context)
 
 
@@ -141,7 +153,18 @@ def home_view(request):
 
     custom_range, papers = paginate_papers(request, papers, 4)
 
-    context = {'papers': papers, 'search': search, 'custom_range': custom_range, 'portals': portals}
+    # Get current student user
+    is_user_an = request.user.is_anonymous
+
+    if is_user_an == False: 
+        print("False")
+        curr_user = request.user
+        curr_student = Student.objects.get(user=curr_user)
+    else: 
+        curr_student = []
+
+
+    context = {'papers': papers, 'search': search, 'custom_range': custom_range, 'portals': portals, 'curr_student': curr_student}
     return render(request, 'features/home.html', context)
 
 
@@ -181,12 +204,32 @@ def paper_view(request, slug):
 
     #custom_range, related_papers = paginate_papers(request, related_papers, 2)
 
-    context = {'paper': paper, 'related_papers': related_papers}
+    # Get current student user
+    is_user_an = request.user.is_anonymous
+
+    if is_user_an == False: 
+        print("False")
+        curr_user = request.user
+        curr_student = Student.objects.get(user=curr_user)
+    else: 
+        curr_student = []
+
+    context = {'paper': paper, 'related_papers': related_papers, 'curr_student': curr_student}
     return render(request, 'features/paper.html', context)
 
 def portal_view(request, slug):
     current_portal = Portal.objects.get(slug=slug)
     portals = Portal.objects.all()
 
-    context = {'current_portal': current_portal, 'portals': portals}
+    # Get current student user
+    is_user_an = request.user.is_anonymous
+
+    if is_user_an == False: 
+        print("False")
+        curr_user = request.user
+        curr_student = Student.objects.get(user=curr_user)
+    else: 
+        curr_student = []
+
+    context = {'current_portal': current_portal, 'portals': portals, 'curr_student': curr_student}
     return render(request, 'features/portal.html', context)
