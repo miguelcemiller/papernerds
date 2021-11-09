@@ -189,4 +189,4 @@ def portal_view(request, slug):
     portals = Portal.objects.all()
 
     context = {'current_portal': current_portal, 'portals': portals}
-    return render(request, 'features/home.html', context)
+    return render(request, 'features/portal.html', context)

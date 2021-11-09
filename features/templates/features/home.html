@@ -72,49 +72,6 @@
     {% endif %}
 
 
-    {% if '/portal' in request.path and request.user.is_authenticated %}
-    <div class="portal-details--research-orientation">
-        <div class="portal-details__heading">
-            <div class="portal-details__heading__step">{{current_portal.step}}</div>
-            {% if current_portal.completed == True %}
-            <img src="{% static 'images/checked_alt.svg' %}" alt="">
-            {% else %}
-            <img src="{% static 'images/checked.svg' %}" alt="">
-            {% endif %}
-            <div class="portal-details__heading__stage">{{current_portal.stage}}</div>
-        </div> 
-
-        <p>Details</p>
-        <div class="portal-details__details">Your subject instructor will thoroughly orient and discuss the nature of activities for the Pre-Proposal stage. Make sure you understand it fully before moving on to the next step.</div>
-
-        <div class="separator"></div>
-
-        <p>Confimation</p>
-        <div class="portal-details__confirmation">Have you understood the Research Orientation contents?</div>
-
-        <button class="btn">Confirm</button>
-    </div>
-
-    <div class="student-sidebar">
-        <div class="student-sidebar__heading">Pre-Proposal <span>&middot; 1/4</span></div>
-        {% for portal in portals %}
-        <a class="student-sidebar__card" href="{% url 'portal' portal.slug %}">
-            <div class="student-sidebar__card__content">
-                <div>{{portal.step}}</div>
-                <div>{{portal.description}}</div>
-            </div>
-            <div class="student-sidebar__card__progress">
-                {% if portal.completed == True %}
-                <img src="{% static 'images/checked_alt.svg' %}" alt="">
-                {% else %}
-                <img src="{% static 'images/checked.svg' %}" alt="">
-                {% endif %}
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-    {% endif %}
-
     
 </section>
 
