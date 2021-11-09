@@ -2,6 +2,32 @@
 
 
 <header>
+    <div class="overlay">
+        <div class="overlay_login">
+            <div class="login_header">
+                <div class="header_title">Log in</div>
+                <div class="close_wrapper">
+                    <img src="{% static 'images/close.svg' %}">
+                </div>
+            </div>
+            
+            <div class="login_details">
+                <form class="login_form" action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="form_input" type="" name="username" placeholder="Username">
+                    <input class="form_input" type="password" name="password" placeholder="Password">
+                    <input class="btn form_btn" type="submit" value="Log in">
+                    <div class="form_forgot">Forgot your password?</div>
+                </form>
+            </div>
+    
+            <div class="login_footer">
+                <div class="separator footer_separator"></div>
+                <div class="footer_text">Don't have an account? <span class="js-sign-up">Sign up</span></div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay search-modal">
         <div class="modal-overlay__search">
             <div class="modal-overlay__search__back">&#10094;</div>
@@ -54,8 +80,8 @@
 
                 <div class="account_modal_m_main">
                     <div class="account_modal_m_picture_name">
-                        <img class="account_modal_m_picture" src="{% static 'images/profiles/headshot.png'%}" >
-                        <div class="account_modal_m_name">{{ request.user.first_name }}</div>
+                        <img class="account_modal_m_picture" src="{{ curr_student.profile_image.url }}" >
+                        <div class="account_modal_m_name">{{ curr_student.firstname }}</div>
                     </div>
                     <div class="separator account_modal_m_separator"></div>
                     <a href="#"><div class="account_modal_m_menu">Profile</div></a>
@@ -77,7 +103,7 @@
         
         {% else %}
         <form class="search-form" action="{% url 'results' %}" method="GET">
-            <button class="search-form__icon" title="Search Papernerds" type="submit">
+            <button class="search-form__icon js-orig" title="Search Papernerds" type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22.575" height="22.557" viewBox="0 0 22.575 22.557"  preserveAspectRatio="none"><path class="a" d="M9.246,18.542a9.211,9.211,0,0,0,5.13-1.559l5.312,5.312a1.105,1.105,0,0,0,1.541,0l1.033-1.033a1.105,1.105,0,0,0,0-1.541l-5.33-5.294a9.242,9.242,0,1,0-7.687,4.115Zm0-14.866A5.62,5.62,0,1,1,3.626,9.3,5.625,5.625,0,0,1,9.246,3.676Z" transform="translate(0 -0.05)"/></svg>
             </button>
             <input class="search-form__text" name="search" type="text" autocomplete="off" placeholder="Search">
@@ -108,10 +134,10 @@
         
         {% else %}
         <div class="sign_in">
-            <a href="{% url 'login' %}"><button class="btn btn_primary">Sign in</button></a>
+            <a><button class="btn js-sign-in">Sign in</button></a>
         </div>
         <div class="sign_in_m hide_sign_in">
-            <a><button class="btn btn_primary">Sign in</button></a>
+            <a><button class="btn">Sign in</button></a>
         </div>
         {% endif %}
     </nav>  
@@ -131,7 +157,7 @@
     });
 
     // ------------Search Modal Overlay---------------
-    $('.search-form__icon').click(function(e) {
+    $('.search-form__icon', 'js-orig').click(function(e) {
         $('.modal-overlay').css('display', 'flex'); // Display modal
         $('body').css('overflow-y', 'hidden'); // Disable vertical scroll on body
         $('.search-form__text').focus(); // Focus search modal text
@@ -153,7 +179,17 @@
 
 
 
-    
+    // Login Modal Desktop
+    $(".js-sign-in").on("click", function() {
+        $(".overlay").css("display", "flex");
+        $('body').css('overflow-y', 'hidden'); // Disable vertical scroll on modal
+    });
+
+
+    $(".close_wrapper").on("click", function() {
+        $(".overlay").css("display", "none");
+        $('body').css('overflow-y', 'auto'); // Enable vertical scroll
+    });
 
 
     // Login Modal Mobile Overlay 

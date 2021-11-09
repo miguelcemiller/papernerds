@@ -4,32 +4,6 @@
 {% block content %}
 
 {% load static %}
-<div class="overlay">
-    <div class="overlay_login">
-        <div class="login_header">
-            <div class="header_title">Log in</div>
-            <div class="close_wrapper">
-                <img src="{% static 'images/close.svg' %}">
-            </div>
-        </div>
-        
-        <div class="login_details">
-            <form class="login_form" action="{% url 'login' %}" method="POST">
-                {% csrf_token %}
-                <input class="form_input" type="" name="username" placeholder="Username">
-                <input class="form_input" type="password" name="password" placeholder="Password">
-                <input class="btn form_btn" type="submit" value="Log in">
-                <div class="form_forgot">Forgot your password?</div>
-            </form>
-        </div>
-
-        <div class="login_footer">
-            <div class="separator footer_separator"></div>
-            <div class="footer_text">Don't have an account? <span class="js-sign-up">Sign up</span></div>
-        </div>
-    </div>
-</div>
-
 <div class="overlay--register">
     <div class="overlay_login">
         <div class="login_header">

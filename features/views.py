@@ -15,11 +15,24 @@ import time
 import pandas as pd
 from . utils import filter__in_preserve, paginate_papers, topic_distrib, paginate_papers
 
+import pickle
+
 
 # Create your views here.
 
 def landing_view(request):
-    return render(request, 'features/landing.html')
+    # Get current student user
+    is_user_an = request.user.is_anonymous
+
+    if is_user_an == False: 
+        print("False")
+        curr_user = request.user
+        curr_student = Student.objects.get(user=curr_user)
+    else: 
+        curr_student = []
+
+    context = {'curr_student': curr_student}
+    return render(request, 'features/landing.html', context)
 
 
 def login_view(request):
@@ -135,8 +148,8 @@ def results_view(request):
         print("False")
         curr_user = request.user
         curr_student = Student.objects.get(user=curr_user)
-
-    curr_student = []
+    else:
+        curr_student = []
 
     context = {'papers': papers, 'search': search, 'custom_range': custom_range, 'curr_student': curr_student}
     return render(request, 'features/home.html', context)
@@ -231,5 +244,47 @@ def portal_view(request, slug):
     else: 
         curr_student = []
 
-    context = {'current_portal': current_portal, 'portals': portals, 'curr_student': curr_student}
+    # curr student 
+    curr_student_firstname = curr_student.firstname
+    curr_student_lastname = curr_student.lastname
+
+    print(curr_student_firstname, curr_student_lastname)
+    # get students descriptions
+    names_to_exclude = [curr_student_firstname, 'admin'] 
+    corpus = Student.objects.values('firstname', 'lastname', 'skills_description').exclude(firstname__in=names_to_exclude)
+    corpus_list = [entry for entry in corpus] 
+
+    df = pd.DataFrame(corpus_list, columns=["firstname", "lastname", "skills_description"])
+    print(df)
+
+    # Open K-Means model and vectorizer
+    with open("models/kmeans.pkl", "rb") as f:
+        model = pickle.load(f)
+        
+    with open("models/kmeans_vectorizer.pkl", "rb") as f:
+        vectorizer = pickle.load(f)
+
+    # current user skill cluster
+    curr_user_skill = [curr_student.skills_description]
+    curr_user_vector = vectorizer.transform(curr_user_skill)
+    curr_user_pred = model.predict(curr_user_vector)
+    curr_user_pred = curr_user_pred[0]
+    print(curr_user_pred)
+
+    group_rec_list = []
+    for firstname, lastname, skill in zip(df['firstname'], df['lastname'], df['skills_description']):
+        skill_vector = vectorizer.transform([skill])
+        skill_pred = model.predict(skill_vector)
+        skill_pred = skill_pred[0]
+        
+        if skill_pred != curr_user_pred: 
+            group_rec_list.append(firstname)
+        
+    print(group_rec_list)
+
+    group_rec = filter__in_preserve(Student.objects, 'firstname', group_rec_list).all()
+    print(group_rec[0].firstname)
+
+
+    context = {'current_portal': current_portal, 'portals': portals, 'curr_student': curr_student, 'group_rec': group_rec}
     return render(request, 'features/portal.html', context)
